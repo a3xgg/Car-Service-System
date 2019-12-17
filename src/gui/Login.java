@@ -7,10 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import oodj.*;
-import user.Role;
 
 public class Login extends JFrame implements ActionListener{
 
@@ -43,14 +41,22 @@ public class Login extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource() == loginBtn){
-            if(username.getText().equals("admin")){
+            if(username.getText().equals("manager")){
                 if(password.getText().equals("foobar")){
-                    //this.setVisible(false);
+                    this.setVisible(false);
                     username.setText(null);
                     password.setText(null);
+                    Oodj.mgrMenuGUI.setVisible(true);
+                }
+            } else if(username.getText().equals("Technician")){
+                if(password.getText().equals("techpass")){
+                    username.setText(null);
+                    password.setText(null);
+                    this.setVisible(false);
+                    Oodj.techMenuGUI.setVisible(true);
                 }
             } else{
-                JOptionPane.showMessageDialog(this, "Wrong Username!");
+                JOptionPane.showMessageDialog(this, "Wrong username!");
             }
         }
     }

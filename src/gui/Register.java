@@ -15,7 +15,7 @@ import user.Person;
 public class Register extends JFrame implements ActionListener {
     
     private JButton registerBtn, backBtn;
-    private JLabel nameLbl, icLbl, emailLbl, phoneNumberLbl, mailingAddressLbl, deptLbl;
+    private JLabel nameLbl, icLbl, emailLbl, phoneNumberLbl, mailingAddressLbl;
     private JTextField nameTf, icTf, emailTf, phoneNumberTf, mailingAddressTf;
     private JRadioButton mgr, tech;
     private ButtonGroup bg;
@@ -40,8 +40,6 @@ public class Register extends JFrame implements ActionListener {
         mailingAddressLbl = new JLabel("Address: ");
         mailingAddressTf = new JTextField(15);
         
-        deptLbl = new JLabel();
-        
         backBtn = new JButton("Back");
         backBtn.addActionListener(this);
         
@@ -58,7 +56,7 @@ public class Register extends JFrame implements ActionListener {
         add(phoneNumberLbl);add(phoneNumberTf);
         add(mailingAddressLbl);add(mailingAddressTf);
         bg.add(mgr);bg.add(tech);
-        add(deptLbl);add(mgr);add(tech);
+        add(mgr);add(tech);
         add(registerBtn);add(backBtn);
         
         setLayout(new FlowLayout(FlowLayout.LEFT,10,10));
@@ -67,9 +65,15 @@ public class Register extends JFrame implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent ae) {
+        //Back button cancels all inputted information and goes back to manager menu
         if(ae.getSource() == backBtn){
             this.setVisible(false);
-            Oodj.loginGUI.setVisible(true);
+            Oodj.mgrMenuGUI.setVisible(true);
+            nameTf.setText(null);
+            icTf.setText(null);
+            emailTf.setText(null);
+            phoneNumberTf.setText(null);
+            mailingAddressTf.setText(null);
         } else if(ae.getSource() == registerBtn){
             
             String name = nameTf.getText();
