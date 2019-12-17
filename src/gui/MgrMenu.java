@@ -9,24 +9,28 @@ import oodj.*;
 
 public class MgrMenu extends JFrame implements ActionListener{
     
-    private JButton registerBtn, logoutBtn;
+    private JButton registerBtn, logoutBtn, customerBtn;
     
     
     public MgrMenu(){
-        setSize(100,100);
+        setSize(300,100);
         setLocation(200,100);
         
-        registerBtn = new JButton("Register");
+        registerBtn = new JButton("Staff Registration");
         registerBtn.addActionListener(this);
         
         logoutBtn = new JButton("Logout");
         logoutBtn.addActionListener(this);
         
+        customerBtn = new JButton("Customer Registration");
+        customerBtn.addActionListener(this);
+        
+        add(customerBtn);
         add(registerBtn);
         add(logoutBtn);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new FlowLayout());
+        setLayout(new FlowLayout(0,20,20));
     }
 
     @Override

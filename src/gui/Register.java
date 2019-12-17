@@ -89,6 +89,10 @@ public class Register extends JFrame implements ActionListener {
             }
             Person p = new Person(name, ic, email, phoneNumber, address, role);
             Oodj.allUser.add(p);
+            //for debugging
+            for(int i = 0; i < Oodj.allUser.size(); i++){
+                System.out.println(Oodj.allUser.get(i).getName());
+            }
         }
     }
     
