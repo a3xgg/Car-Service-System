@@ -1,20 +1,20 @@
 package user;
 public class Person {
-    private String name, icNumber, role, email, phoneNumber, mailingAddress;
+    private String name, icNumber, department, email, phoneNumber, mailingAddress;
     //Default Constructor
     public Person(){}
     //Constructor for Customer
-    public Person(String name, String icNumber, String email, String phoneNumber, String mailingAddress, String role){
+    public Person(String name, String icNumber, String email, String phoneNumber, String mailingAddress, String department){
         this.name = name;
         this.icNumber = icNumber;
         this.email = email;
         this.phoneNumber =  phoneNumber;
         this.mailingAddress = mailingAddress;
-        this.role = role;
+        this.department = department;
     }
 
-    public String getRole() {
-        return role;
+    public String getDepartment() {
+        return department;
     }
 
     public String getName() {

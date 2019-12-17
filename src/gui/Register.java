@@ -10,17 +10,18 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import oodj.*;
+import user.Person;
 
 public class Register extends JFrame implements ActionListener {
     
     private JButton registerBtn, backBtn;
-    private JLabel nameLbl, icLbl, emailLbl, phoneNumberLbl, mailingAddressLbl;
+    private JLabel nameLbl, icLbl, emailLbl, phoneNumberLbl, mailingAddressLbl, deptLbl;
     private JTextField nameTf, icTf, emailTf, phoneNumberTf, mailingAddressTf;
-    private JRadioButton cust, mgr, tech;
+    private JRadioButton mgr, tech;
     private ButtonGroup bg;
     
     public Register(){
-        setSize(200,500);
+        setSize(210,500);
         setLocation(100, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -39,11 +40,12 @@ public class Register extends JFrame implements ActionListener {
         mailingAddressLbl = new JLabel("Address: ");
         mailingAddressTf = new JTextField(15);
         
+        deptLbl = new JLabel();
+        
         backBtn = new JButton("Back");
         backBtn.addActionListener(this);
         
         bg = new ButtonGroup();
-        cust = new JRadioButton("Customer");
         mgr = new JRadioButton("Manager");
         tech = new JRadioButton("Technician");
         
@@ -55,8 +57,8 @@ public class Register extends JFrame implements ActionListener {
         add(emailLbl);add(emailTf);
         add(phoneNumberLbl);add(phoneNumberTf);
         add(mailingAddressLbl);add(mailingAddressTf);
-        bg.add(cust);bg.add(mgr);bg.add(tech);
-        add(cust);add(mgr);add(tech);
+        bg.add(mgr);bg.add(tech);
+        add(deptLbl);add(mgr);add(tech);
         add(registerBtn);add(backBtn);
         
         setLayout(new FlowLayout(FlowLayout.LEFT,10,10));
@@ -69,19 +71,20 @@ public class Register extends JFrame implements ActionListener {
             this.setVisible(false);
             Oodj.loginGUI.setVisible(true);
         } else if(ae.getSource() == registerBtn){
-            String role;
+            
             String name = nameTf.getText();
             String ic = icTf.getText();
-            
-            if(cust.isSelected()){
-                role = cust.getText();
-            } else if(mgr.isSelected()){
+            String email = emailTf.getText();
+            String phoneNumber = phoneNumberTf.getText();
+            String address = mailingAddressTf.getText();
+            String role = null;
+            if(mgr.isSelected()){
                 role = mgr.getText();
             } else if(tech.isSelected()){
                 role = tech.getText();
             }
-            //Person p = new Person(name,email,phoneNumber);
-            //Oodj.allUser.add(p);
+            Person p = new Person(name, ic, email, phoneNumber, address, role);
+            Oodj.allUser.add(p);
         }
     }
     

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import oodj.*;
@@ -13,7 +14,7 @@ import user.Role;
 
 public class Login extends JFrame implements ActionListener{
 
-    private final JButton loginBtn,signUpBtn;
+    private final JButton loginBtn;
     private JTextField username, password;
     private final JLabel usrlbl, passlbl;
 
@@ -32,10 +33,8 @@ public class Login extends JFrame implements ActionListener{
 
         loginBtn = new JButton("Login");
         loginBtn.addActionListener(this);
-        signUpBtn = new JButton("Sign Up");
-        signUpBtn.addActionListener(this);
 
-        add(usrlbl);add(username);add(passlbl);add(password);add(loginBtn);add(signUpBtn);
+        add(usrlbl);add(username);add(passlbl);add(password);add(loginBtn);
         
         setVisible(true);
         setLayout(new FlowLayout());
@@ -43,19 +42,15 @@ public class Login extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if(ae.getSource() == signUpBtn){
-            this.setVisible(false);
-            Oodj.registerGUI.setVisible(true);
-        } else if(ae.getSource() == loginBtn){
-            String user,pass;
-            user = username.getText().toString();
-            pass = password.getText().toString();
-            if(user.equals("admin")){
-                if(pass.equals("foobar")){
-                    
+        if(ae.getSource() == loginBtn){
+            if(username.getText().equals("admin")){
+                if(password.getText().equals("foobar")){
+                    //this.setVisible(false);
+                    username.setText(null);
+                    password.setText(null);
                 }
             } else{
-                
+                JOptionPane.showMessageDialog(this, "Wrong Username!");
             }
         }
     }
