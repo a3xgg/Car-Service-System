@@ -20,22 +20,27 @@ public class Register extends JFrame implements ActionListener {
     private ButtonGroup bg;
     
     public Register(){
-        setSize(300,500);
+        setSize(200,500);
         setLocation(100, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        nameLbl = new JLabel("First Name: ");
+        nameLbl = new JLabel("Full Name: ");
         nameTf = new JTextField(15);
         
-        icLbl = new JLabel("IC/Passport");
+        icLbl = new JLabel("IC/Passport: ");
         icTf = new JTextField(15);
         
         emailLbl = new JLabel("E-mail: ");
-        emailTf = new JTextField(17);
+        emailTf = new JTextField(15);
+        
+        phoneNumberLbl = new JLabel("Phone No: ");
+        phoneNumberTf = new JTextField(15);
+        
+        mailingAddressLbl = new JLabel("Address: ");
+        mailingAddressTf = new JTextField(15);
         
         backBtn = new JButton("Back");
         backBtn.addActionListener(this);
-        
         
         bg = new ButtonGroup();
         cust = new JRadioButton("Customer");
@@ -48,11 +53,13 @@ public class Register extends JFrame implements ActionListener {
         add(nameLbl);add(nameTf);
         add(icLbl);add(icTf);
         add(emailLbl);add(emailTf);
+        add(phoneNumberLbl);add(phoneNumberTf);
+        add(mailingAddressLbl);add(mailingAddressTf);
         bg.add(cust);bg.add(mgr);bg.add(tech);
         add(cust);add(mgr);add(tech);
         add(registerBtn);add(backBtn);
         
-        setLayout(new FlowLayout(0,10,10));
+        setLayout(new FlowLayout(FlowLayout.LEFT,10,10));
         setVisible(false);
     }
     
@@ -62,8 +69,17 @@ public class Register extends JFrame implements ActionListener {
             this.setVisible(false);
             Oodj.loginGUI.setVisible(true);
         } else if(ae.getSource() == registerBtn){
+            String role;
             String name = nameTf.getText();
             String ic = icTf.getText();
+            
+            if(cust.isSelected()){
+                role = cust.getText();
+            } else if(mgr.isSelected()){
+                role = mgr.getText();
+            } else if(tech.isSelected()){
+                role = tech.getText();
+            }
             //Person p = new Person(name,email,phoneNumber);
             //Oodj.allUser.add(p);
         }
