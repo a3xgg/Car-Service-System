@@ -1,4 +1,10 @@
 package user;
-public class Mechanic {
+public class Mechanic extends Person{
+    
+    private String department;
+    
+    public Mechanic(){
+        super();
+    }
     
 }
