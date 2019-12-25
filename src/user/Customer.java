@@ -7,4 +7,8 @@ public class Customer extends Person{
         super(name, icNumber, email, phoneNumber, mailingAddress);
         this.custID = custID;
     }
+
+    public int getCustID() {
+        return custID;
+    }
 }

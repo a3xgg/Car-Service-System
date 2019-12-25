@@ -3,16 +3,16 @@ package gui;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintWriter;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import oodj.*;
 
 public class Login extends JFrame implements ActionListener{
 
-    private final JButton loginBtn;
+    private final JButton loginBtn, quitBtn;
     private JTextField username, password;
     private final JLabel usrlbl, passlbl;
 
@@ -31,8 +31,11 @@ public class Login extends JFrame implements ActionListener{
 
         loginBtn = new JButton("Login");
         loginBtn.addActionListener(this);
+        
+        quitBtn = new JButton("Quit");
+        quitBtn.addActionListener(this);
 
-        add(usrlbl);add(username);add(passlbl);add(password);add(loginBtn);
+        add(usrlbl);add(username);add(passlbl);add(password);add(loginBtn);add(quitBtn);
         
         setVisible(true);
         setLayout(new FlowLayout());
@@ -41,25 +44,27 @@ public class Login extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource() == loginBtn){
-            if(username.getText().equals("manager")){
-                if(password.getText().equals("foobar")){
-                    this.setVisible(false);
-                    username.setText(null);
-                    password.setText(null);
-                    Oodj.mgrMenuGUI.setVisible(true);
+            username.setText(null);
+            password.setText(null);
+            this.setVisible(false);
+            Oodj.registerGUI.setVisible(true);
+        } else if(ae.getSource() == quitBtn){
+            try{
+                PrintWriter p = new PrintWriter("staff.txt");
+                for(int i = 0; i < Oodj.allUser.size(); i++){
+                    p.println(Oodj.allUser.get(i).getUsername());
+                    p.println(Oodj.allUser.get(i).getPassword());
+                    p.println(Oodj.allUser.get(i).getName());
+                    p.println(Oodj.allUser.get(i).getIcNumber());
+                    p.println(Oodj.allUser.get(i).getEmail());
+                    p.println(Oodj.allUser.get(i).getPhoneNumber());
+                    p.println(Oodj.allUser.get(i).getMailingAddress());
+                    p.println(Oodj.allUser.get(i).getDepartment());
+                    p.println();
                 }
-            } else if(username.getText().equals("Technician")){
-                if(password.getText().equals("techpass")){
-                    username.setText(null);
-                    password.setText(null);
-                    this.setVisible(false);
-                    Oodj.techMenuGUI.setVisible(true);
-                }
-            } else{
-                JOptionPane.showMessageDialog(this, "Wrong username!");
-            }
+                p.close();
+                System.exit(0);
+            } catch(Exception e){}
         }
     }
-    
-    
 }
