@@ -58,12 +58,5 @@ public class Oodj {
                 staffAccounts.add(staffAccount);
             }
         } catch(Exception e2){}
-        
-        for(int i =0; i < staffDetails.size(); i++){
-            System.out.println(staffAccounts.get(i).getStaff());
-            System.out.println(staffDetails.get(i).getStaffAccount());
-        }
-        
-    }
-    
+    } 
 }

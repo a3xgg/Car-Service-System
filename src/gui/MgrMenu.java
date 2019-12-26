@@ -40,6 +40,7 @@ public class MgrMenu extends JFrame implements ActionListener{
             Oodj.registerGUI.setVisible(true);
         } else if(ae.getSource() == logoutBtn){
             this.setVisible(false);
+            Oodj.loginGUI.loggedInUser.setText(null); //clear the logged in user text for mgrMenu, if not previous logged in text will still show.
             Oodj.loginGUI.setVisible(true);
         }
     }

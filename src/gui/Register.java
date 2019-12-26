@@ -7,6 +7,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import oodj.*;
@@ -18,8 +20,9 @@ public class Register extends JFrame implements ActionListener {
     private Staff staffDetails;
     private StaffAccount staffAccounts;
     private JButton registerBtn, backBtn;
-    private JLabel nameLbl, icLbl, emailLbl, phoneNumberLbl, mailingAddressLbl, usernameLbl, passwordLbl;
-    private JTextField nameTf, icTf, emailTf, phoneNumberTf, mailingAddressTf, usernameTf, passwordTf;
+    private JPasswordField pwdField,retypePwdField;
+    private JLabel nameLbl, icLbl, emailLbl, phoneNumberLbl, mailingAddressLbl, usernameLbl, passwordLbl, retypePwdLbl;
+    private JTextField nameTf, icTf, emailTf, phoneNumberTf, mailingAddressTf, usernameTf;
     private JRadioButton mgr, tech;
     private ButtonGroup bg;
     
@@ -32,7 +35,10 @@ public class Register extends JFrame implements ActionListener {
         usernameTf = new JTextField(15);
         
         passwordLbl = new JLabel("Password: ");
-        passwordTf = new JTextField(15);
+        pwdField = new JPasswordField(15);
+        
+        retypePwdLbl = new JLabel("Re-type PW: ");
+        retypePwdField = new JPasswordField(15);
         
         nameLbl = new JLabel("Full Name: ");
         nameTf = new JTextField(15);
@@ -60,7 +66,8 @@ public class Register extends JFrame implements ActionListener {
         registerBtn.addActionListener(this);
         
         add(usernameLbl);add(usernameTf);
-        add(passwordLbl);add(passwordTf);
+        add(passwordLbl);add(pwdField);
+        add(retypePwdLbl);add(retypePwdField);
         add(nameLbl);add(nameTf);
         add(icLbl);add(icTf);
         add(emailLbl);add(emailTf);
@@ -87,25 +94,32 @@ public class Register extends JFrame implements ActionListener {
             mailingAddressTf.setText(null);
         } else if(ae.getSource() == registerBtn){
             String username = usernameTf.getText();
-            String password = passwordTf.getText();
-            String name = nameTf.getText();
-            String ic = icTf.getText();
-            String email = emailTf.getText();
-            String phoneNumber = phoneNumberTf.getText();
-            String address = mailingAddressTf.getText();
-            String role = null;
-            if(username.isEmpty() || password.isEmpty() || name.isEmpty() || ic.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()){
-                System.out.println("Some fields are empty!");
+            String password = new String(pwdField.getPassword());
+            String retypepw = new String(retypePwdField.getPassword());
+            if(!(password.equals(retypepw))){
+                JOptionPane.showMessageDialog(this, "Password does not match!");
+                pwdField.setText(null);
+                retypePwdField.setText(null);
             } else{
-                if(mgr.isSelected()){
-                    role = mgr.getText();
-                } else if(tech.isSelected()){
-                    role = tech.getText();
-                }
-                staffDetails = new Staff(name,ic,email,phoneNumber,address,role);
-                staffAccounts = new StaffAccount(username,password,staffDetails);
-                Oodj.staffDetails.add(staffDetails);
-                Oodj.staffAccounts.add(staffAccounts);
+                String name = nameTf.getText();
+                String ic = icTf.getText();
+                String email = emailTf.getText();
+                String phoneNumber = phoneNumberTf.getText();
+                String address = mailingAddressTf.getText();
+                String role = null;
+                if(username.isEmpty() || password.isEmpty() || retypepw.isEmpty() || name.isEmpty() || ic.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()){
+                    System.out.println("Some fields are empty!");
+                } else{
+                    if(mgr.isSelected()){
+                        role = mgr.getText();
+                    } else if(tech.isSelected()){
+                        role = tech.getText();
+                    }
+                    staffDetails = new Staff(name,ic,email,phoneNumber,address,role);
+                    staffAccounts = new StaffAccount(username,password,staffDetails);
+                    Oodj.staffDetails.add(staffDetails);
+                    Oodj.staffAccounts.add(staffAccounts);
+                } 
             }
         }
     }

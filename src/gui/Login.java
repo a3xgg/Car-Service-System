@@ -10,14 +10,18 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import oodj.*;
+import javax.swing.JPasswordField;
 
 public class Login extends JFrame implements ActionListener{
-
+    
     private final JButton loginBtn, quitBtn;
-    private final JTextField username, password;
+    private final JTextField username;
+    private final JPasswordField password;
     private final JLabel usrlbl, passlbl;
+    public JLabel loggedInUser;
 
     public Login(){
+
         setSize(300,140);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(100,200);
@@ -25,10 +29,13 @@ public class Login extends JFrame implements ActionListener{
         usrlbl = new JLabel("Username: ");
         //username textfield
         username = new JTextField(15);
+        username.addActionListener(this);
         //password label
         passlbl = new JLabel("Password: ");
         //password textfield
-        password = new JTextField(15);
+        password = new JPasswordField(15);
+        password.addActionListener(this);
+        
 
         loginBtn = new JButton("Login");
         loginBtn.addActionListener(this);
@@ -36,7 +43,8 @@ public class Login extends JFrame implements ActionListener{
         quitBtn = new JButton("Quit");
         quitBtn.addActionListener(this);
 
-        add(usrlbl);add(username);add(passlbl);add(password);add(loginBtn);add(quitBtn);
+        add(usrlbl);add(username);add(passlbl);add(password);//add(password1);
+        add(loginBtn);add(quitBtn);
         
         setVisible(true);
         setLayout(new FlowLayout());
@@ -44,24 +52,32 @@ public class Login extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if(ae.getSource() == loginBtn){
+        /*
+        Login button and pressing the ENTER button will invoke the action to login.
+        if no username and password is entered, program will show 'Wrong Credentials'
+        if wrong username and password is entered, program will show 'Wrong Credentials'
+        */
+        if(ae.getSource() == loginBtn || ae.getSource() == username || ae.getSource() == password){
             boolean flag = false;
             String uname = username.getText();
-            String pwd = password.getText();
-            for(int i = 0; i < Oodj.staffAccounts.size(); i++){
+            String pwd = new String(password.getPassword());
+            for(int i = 0; i < Oodj.staffAccounts.size(); i++){ // searches through the file for the username
                 if(uname.equals(Oodj.staffAccounts.get(i).getUsername())){
-                    Oodj.loginAccount = Oodj.staffAccounts.get(i);
+                    Oodj.loginAccount = Oodj.staffAccounts.get(i); // if it gets the username, it will store the logged in user's 'object' into the loginAccount variable, else 'Wrong Credentials'
                     flag = true;
                     break;
                 } 
             }
-            if(flag){
+            if(flag){ // if it got the result, next is to check the password
                 if(pwd.equals(Oodj.loginAccount.getPassword())){
+                    loggedInUser = new JLabel("Logged in as: " + Oodj.loginAccount.getStaff().getName());
                     if(Oodj.loginAccount.getStaff().getDepartment().equals("Manager")){
                         this.setVisible(false);
+                        Oodj.mgrMenuGUI.add(loggedInUser);
                         Oodj.mgrMenuGUI.setVisible(true);
                     } else if(Oodj.loginAccount.getStaff().getDepartment().equals("Technician")){
                         this.setVisible(false);
+                        Oodj.techMenuGUI.add(loggedInUser);
                         Oodj.techMenuGUI.setVisible(true);
                     }
                 }
