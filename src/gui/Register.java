@@ -93,34 +93,52 @@ public class Register extends JFrame implements ActionListener {
             phoneNumberTf.setText(null);
             mailingAddressTf.setText(null);
         } else if(ae.getSource() == registerBtn){
+            boolean flag = false;
             String username = usernameTf.getText();
-            String password = new String(pwdField.getPassword());
-            String retypepw = new String(retypePwdField.getPassword());
-            if(!(password.equals(retypepw))){
-                JOptionPane.showMessageDialog(this, "Password does not match!");
-                pwdField.setText(null);
-                retypePwdField.setText(null);
-            } else{
-                String name = nameTf.getText();
-                String ic = icTf.getText();
-                String email = emailTf.getText();
-                String phoneNumber = phoneNumberTf.getText();
-                String address = mailingAddressTf.getText();
-                String role = null;
-                if(username.isEmpty() || password.isEmpty() || retypepw.isEmpty() || name.isEmpty() || ic.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()){
-                    System.out.println("Some fields are empty!");
-                } else{
-                    if(mgr.isSelected()){
-                        role = mgr.getText();
-                    } else if(tech.isSelected()){
-                        role = tech.getText();
-                    }
-                    staffDetails = new Staff(name,ic,email,phoneNumber,address,role);
-                    staffAccounts = new StaffAccount(username,password,staffDetails);
-                    Oodj.staffDetails.add(staffDetails);
-                    Oodj.staffAccounts.add(staffAccounts);
-                } 
+            //checks whether username exist, if yes 'Username Taken' else continue;
+            for(int i = 0; i < Oodj.staffAccounts.size(); i++){
+                if(username.equals(Oodj.staffAccounts.get(i).getUsername())){
+                    flag = true;
+                    break;
+                }
             }
+            if(flag){
+                JOptionPane.showMessageDialog(this, "Username is taken");
+            } else{
+                String password = new String(pwdField.getPassword());
+                String retypepw = new String(retypePwdField.getPassword());
+                /*
+                checks password match
+                if does not match 'Password does not match'
+                else continue
+                */
+                if(!(password.equals(retypepw))){
+                    JOptionPane.showMessageDialog(this, "Password does not match!");
+                    pwdField.setText(null);
+                    retypePwdField.setText(null);
+                } else{
+                    String name = nameTf.getText();
+                    String ic = icTf.getText();
+                    String email = emailTf.getText();
+                    String phoneNumber = phoneNumberTf.getText();
+                    String address = mailingAddressTf.getText();
+                    String role = null;
+                    if(username.isEmpty() || password.isEmpty() || retypepw.isEmpty() || name.isEmpty() || ic.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()){
+                        System.out.println("Some fields are empty!");
+                    } else{
+                        if(mgr.isSelected()){
+                            role = mgr.getText();
+                        } else if(tech.isSelected()){
+                            role = tech.getText();
+                        }
+                        staffDetails = new Staff(name,ic,email,phoneNumber,address,role);
+                        staffAccounts = new StaffAccount(username,password,staffDetails);
+                        Oodj.staffDetails.add(staffDetails);
+                        Oodj.staffAccounts.add(staffAccounts);
+                    } 
+                }
+            }
+            
         }
     }
     
