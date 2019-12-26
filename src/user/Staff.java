@@ -1,24 +1,27 @@
 package user;
+
+import java.util.ArrayList;
+
 public class Staff extends Person{
     
-    private String department, username, password;
+    private String department;
+    private ArrayList<StaffAccount> staffAccount;
     
-    public Staff(String username, String password, String name, String icNumber, String email, String phoneNumber, String mailingAddress, String department) {
+    public Staff(String name, String icNumber, String email, String phoneNumber, String mailingAddress, String department) {
         super(name, icNumber, email, phoneNumber, mailingAddress);
         this.department = department;
-        this.username = username;
-        this.password = password;
+        staffAccount = new ArrayList<StaffAccount>();
+    }
+
+    public ArrayList<StaffAccount> getStaffAccount() {
+        return staffAccount;
+    }
+    
+    public void addStaffAccount(StaffAccount staffAccount){
+        this.staffAccount.add(staffAccount);
     }
 
     public String getDepartment() {
         return department;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }

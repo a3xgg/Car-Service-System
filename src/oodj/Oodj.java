@@ -12,10 +12,13 @@ public class Oodj {
     public static Register registerGUI;
     public static TechMenu techMenuGUI;
     public static MgrMenu mgrMenuGUI;
-    public static ArrayList<Staff> allUser;
+    public static ArrayList<Staff> staffDetails;
+    public static ArrayList<StaffAccount> staffAccounts;
+    public static StaffAccount loginAccount;
     
     public static void main(String[] args) {
-        allUser = new ArrayList<Staff>();
+        staffDetails = new ArrayList<Staff>();
+        staffAccounts = new ArrayList<StaffAccount>();
         loginGUI = new Login();
         registerGUI = new Register();
         techMenuGUI = new TechMenu();
@@ -24,8 +27,6 @@ public class Oodj {
         try{
             Scanner s = new Scanner(new File("staff.txt"));
             while(s.hasNext()){
-                String username = s.nextLine();
-                String password = s.nextLine();
                 String name = s.nextLine();
                 String ic = s.nextLine();
                 String email = s.nextLine();
@@ -33,14 +34,34 @@ public class Oodj {
                 String address = s.nextLine();
                 String department = s.nextLine();
                 s.nextLine();
-                Staff staffs = new Staff(username,password,name,ic,email,phone,address,department);
-                allUser.add(staffs);
+                Staff staffsDetails = new Staff(name,ic,email,phone,address,department);
+                staffDetails.add(staffsDetails);
             }
-        } catch(Exception e){
-            
-        }
-        for(int i =0; i < allUser.size(); i++){
-            System.out.println(allUser.get(i).getName());
+        } catch(Exception e){}
+        try{
+            Scanner s2 = new Scanner(new File("staffAccount.txt"));
+            while(s2.hasNext()){
+                String username = s2.nextLine();
+                String password = s2.nextLine();
+                String name = s2.nextLine();
+                s2.nextLine();
+                Staff accountOwner = null;
+                for(int i = 0; i < staffDetails.size(); i++){
+                    Staff temp = staffDetails.get(i);
+                    if(name.equals(temp.getName())){
+                        accountOwner = temp;
+                        break;
+                    }
+                }
+                StaffAccount staffAccount = new StaffAccount(username,password,accountOwner);
+                accountOwner.getStaffAccount().add(staffAccount);
+                staffAccounts.add(staffAccount);
+            }
+        } catch(Exception e2){}
+        
+        for(int i =0; i < staffDetails.size(); i++){
+            System.out.println(staffAccounts.get(i).getStaff());
+            System.out.println(staffDetails.get(i).getStaffAccount());
         }
         
     }

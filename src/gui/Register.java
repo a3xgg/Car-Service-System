@@ -11,10 +11,12 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import oodj.*;
 import user.Staff;
+import user.StaffAccount;
 
 public class Register extends JFrame implements ActionListener {
     
-    private Staff staffAccount;
+    private Staff staffDetails;
+    private StaffAccount staffAccounts;
     private JButton registerBtn, backBtn;
     private JLabel nameLbl, icLbl, emailLbl, phoneNumberLbl, mailingAddressLbl, usernameLbl, passwordLbl;
     private JTextField nameTf, icTf, emailTf, phoneNumberTf, mailingAddressTf, usernameTf, passwordTf;
@@ -100,8 +102,10 @@ public class Register extends JFrame implements ActionListener {
                 } else if(tech.isSelected()){
                     role = tech.getText();
                 }
-                staffAccount = new Staff(username,password,name,ic,email,phoneNumber,address,role);
-                Oodj.allUser.add(staffAccount);
+                staffDetails = new Staff(name,ic,email,phoneNumber,address,role);
+                staffAccounts = new StaffAccount(username,password,staffDetails);
+                Oodj.staffDetails.add(staffDetails);
+                Oodj.staffAccounts.add(staffAccounts);
             }
         }
     }
