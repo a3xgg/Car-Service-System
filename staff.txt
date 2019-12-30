@@ -19,3 +19,24 @@ jcena@example.com
 WWE
 Manager
 
+John Hammer
+C1107777
+jhammer@gmail.com
+123123
+DDDFF
+Technician
+
+Jim Cena
+123123
+123123@mail.com
+123123
+asdfasdf
+Technician
+
+Marshall Mathers
+123123
+asdfasdf@mail.com
+123123
+123123
+Manager
+
