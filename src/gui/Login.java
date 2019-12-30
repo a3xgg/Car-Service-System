@@ -25,18 +25,15 @@ public class Login extends JFrame implements ActionListener{
         setSize(300,140);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(100,200);
-        //username label
+
         usrlbl = new JLabel("Username: ");
-        //username textfield
         username = new JTextField(15);
         username.addActionListener(this);
-        //password label
+
         passlbl = new JLabel("Password: ");
-        //password textfield
         password = new JPasswordField(15);
         password.addActionListener(this);
         
-
         loginBtn = new JButton("Login");
         loginBtn.addActionListener(this);
         
@@ -61,9 +58,9 @@ public class Login extends JFrame implements ActionListener{
             boolean flag = false;
             String uname = username.getText();
             String pwd = new String(password.getPassword());
-            for(int i = 0; i < Oodj.staffAccounts.size(); i++){ // searches through the file for the username
-                if(uname.equals(Oodj.staffAccounts.get(i).getUsername())){
-                    Oodj.loginAccount = Oodj.staffAccounts.get(i); // if it gets the username, it will store the logged in user's 'object' into the loginAccount variable, else 'Wrong Credentials'
+            for(int i = 0; i < Oodj.userAccount.size(); i++){ // searches through the file for the username
+                if(uname.equals(Oodj.userAccount.get(i).getUsername())){
+                    Oodj.loginAccount = Oodj.userAccount.get(i); // if it gets the username, it will store the logged in user's 'object' into the loginAccount variable, else 'Wrong Credentials'
                     flag = true;
                     break;
                 } 
@@ -80,10 +77,17 @@ public class Login extends JFrame implements ActionListener{
                         Oodj.techMenuGUI.add(loggedInUser);
                         Oodj.techMenuGUI.setVisible(true);
                     }
+                } else{
+                    if(pwd.isEmpty()){
+                        JOptionPane.showMessageDialog(this, "Please enter your password!");
+                    } else{
+                        JOptionPane.showMessageDialog(this, "Wrong password!");
+                    }
                 }
             } else{
                 JOptionPane.showMessageDialog(this, "Wrong Credentials!");
             }
+            //Sets all text and password field to null if either credentials is incorrect or correct
             username.setText(null);
             password.setText(null);
         } else if(ae.getSource() == quitBtn){
@@ -105,11 +109,11 @@ public class Login extends JFrame implements ActionListener{
                     p.println();
                 }
                 p.close();
-                PrintWriter p2 = new PrintWriter("staffAccount.txt");
-                for(int i = 0; i < Oodj.staffAccounts.size(); i++){
-                    p2.println(Oodj.staffAccounts.get(i).getUsername());
-                    p2.println(Oodj.staffAccounts.get(i).getPassword());
-                    p2.println(Oodj.staffAccounts.get(i).getStaff().getName());
+                PrintWriter p2 = new PrintWriter("Account.txt");
+                for(int i = 0; i < Oodj.userAccount.size(); i++){
+                    p2.println(Oodj.userAccount.get(i).getUsername());
+                    p2.println(Oodj.userAccount.get(i).getPassword());
+                    p2.println(Oodj.userAccount.get(i).getStaff().getName());
                     p2.println();
                 }
                 p2.close();

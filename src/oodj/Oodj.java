@@ -13,12 +13,12 @@ public class Oodj {
     public static TechMenu techMenuGUI;
     public static MgrMenu mgrMenuGUI;
     public static ArrayList<Staff> staffDetails;
-    public static ArrayList<StaffAccount> staffAccounts;
-    public static StaffAccount loginAccount;
+    public static ArrayList<Account> userAccount;
+    public static Account loginAccount;
     
     public static void main(String[] args) {
         staffDetails = new ArrayList<Staff>();
-        staffAccounts = new ArrayList<StaffAccount>();
+        userAccount = new ArrayList<Account>();
         loginGUI = new Login();
         registerGUI = new Register();
         techMenuGUI = new TechMenu();
@@ -39,7 +39,7 @@ public class Oodj {
             }
         } catch(Exception e){}
         try{
-            Scanner s2 = new Scanner(new File("staffAccount.txt"));
+            Scanner s2 = new Scanner(new File("Account.txt"));
             while(s2.hasNext()){
                 String username = s2.nextLine();
                 String password = s2.nextLine();
@@ -53,9 +53,8 @@ public class Oodj {
                         break;
                     }
                 }
-                StaffAccount staffAccount = new StaffAccount(username,password,accountOwner);
-                accountOwner.getStaffAccount().add(staffAccount);
-                staffAccounts.add(staffAccount);
+                Account account = new Account(username,password,accountOwner);
+                userAccount.add(account);
             }
         } catch(Exception e2){}
     } 

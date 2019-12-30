@@ -12,22 +12,21 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import oodj.*;
-import user.Staff;
-import user.StaffAccount;
+import user.*;
 
 public class Register extends JFrame implements ActionListener {
     
     private Staff staffDetails;
-    private StaffAccount staffAccounts;
+    private Account staffAccounts;
     private JButton registerBtn, backBtn;
     private JPasswordField pwdField,retypePwdField;
     private JLabel nameLbl, icLbl, emailLbl, phoneNumberLbl, mailingAddressLbl, usernameLbl, passwordLbl, retypePwdLbl;
     private JTextField nameTf, icTf, emailTf, phoneNumberTf, mailingAddressTf, usernameTf;
     private JRadioButton mgr, tech;
     private ButtonGroup bg;
-    
+
     public Register(){
-        setSize(210,510);
+        setSize(210,570);
         setLocation(100, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -58,6 +57,7 @@ public class Register extends JFrame implements ActionListener {
         backBtn = new JButton("Back");
         backBtn.addActionListener(this);
         
+        //adds radio into a button group
         bg = new ButtonGroup();
         mgr = new JRadioButton("Manager");
         tech = new JRadioButton("Technician");
@@ -96,8 +96,8 @@ public class Register extends JFrame implements ActionListener {
             boolean flag = false;
             String username = usernameTf.getText();
             //checks whether username exist, if yes 'Username Taken' else continue;
-            for(int i = 0; i < Oodj.staffAccounts.size(); i++){
-                if(username.equals(Oodj.staffAccounts.get(i).getUsername())){
+            for(int i = 0; i < Oodj.userAccount.size(); i++){
+                if(username.equals(Oodj.userAccount.get(i).getUsername())){
                     flag = true;
                     break;
                 }
@@ -116,26 +116,29 @@ public class Register extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(this, "Password does not match!");
                     pwdField.setText(null);
                     retypePwdField.setText(null);
+                }
+                String name = nameTf.getText();
+                String ic = icTf.getText();
+                String email = emailTf.getText();
+                String phoneNumber = phoneNumberTf.getText();
+                String address = mailingAddressTf.getText();
+                String role = null;
+                if(username.isEmpty() || password.isEmpty() || retypepw.isEmpty() || name.isEmpty() || ic.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()){
+                    //checks whether there are some fields that are left empty
+                    JOptionPane.showMessageDialog(this, "Some fields are empty!");
                 } else{
-                    String name = nameTf.getText();
-                    String ic = icTf.getText();
-                    String email = emailTf.getText();
-                    String phoneNumber = phoneNumberTf.getText();
-                    String address = mailingAddressTf.getText();
-                    String role = null;
-                    if(username.isEmpty() || password.isEmpty() || retypepw.isEmpty() || name.isEmpty() || ic.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()){
-                        System.out.println("Some fields are empty!");
-                    } else{
-                        if(mgr.isSelected()){
-                            role = mgr.getText();
-                        } else if(tech.isSelected()){
-                            role = tech.getText();
-                        }
-                        staffDetails = new Staff(name,ic,email,phoneNumber,address,role);
-                        staffAccounts = new StaffAccount(username,password,staffDetails);
-                        Oodj.staffDetails.add(staffDetails);
-                        Oodj.staffAccounts.add(staffAccounts);
-                    } 
+                    if(mgr.isSelected()){
+                        role = mgr.getText();
+                    } else if(tech.isSelected()){
+                        role = tech.getText();
+                    }
+                    staffDetails = new Staff(name,ic,email,phoneNumber,address,role);
+                    staffAccounts = new Account(username,password,staffDetails);
+                    Oodj.staffDetails.add(staffDetails);
+                    Oodj.userAccount.add(staffAccounts);
+                    JOptionPane.showMessageDialog(this, "Account successfully created!");
+                    this.setVisible(false);
+                    Oodj.mgrMenuGUI.setVisible(true);
                 }
             }
             
