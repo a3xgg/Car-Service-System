@@ -43,7 +43,7 @@ public class Login extends JFrame implements ActionListener{
         quitBtn = new JButton("Quit");
         quitBtn.addActionListener(this);
 
-        add(usrlbl);add(username);add(passlbl);add(password);//add(password1);
+        add(usrlbl);add(username);add(passlbl);add(password);
         add(loginBtn);add(quitBtn);
         
         setVisible(true);
