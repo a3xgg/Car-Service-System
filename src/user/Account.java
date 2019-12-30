@@ -1,10 +1,10 @@
 package user;
-public class StaffAccount {
+public class Account {
     
     private String username, password;
     private Staff staff;
     
-    public StaffAccount(String username, String password, Staff staff){
+    public Account(String username, String password, Staff staff){
         this.username = username;
         this.password = password;
         this.staff = staff;
