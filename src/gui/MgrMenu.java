@@ -5,15 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import oodj.*;
 
 public class MgrMenu extends JFrame implements ActionListener{
     
-    private JButton registerBtn, logoutBtn, customerBtn;
+    private JButton registerBtn, logoutBtn, bookingBtn;
+    private String[] option = {"New Customer","Returning Customer"};
     
     
     public MgrMenu(){
-        setSize(300,100);
+        setSize(500,150);
         setLocation(200,100);
         
         registerBtn = new JButton("Staff Registration");
@@ -22,10 +24,10 @@ public class MgrMenu extends JFrame implements ActionListener{
         logoutBtn = new JButton("Logout");
         logoutBtn.addActionListener(this);
         
-        customerBtn = new JButton("Customer Registration");
-        customerBtn.addActionListener(this);
+        bookingBtn = new JButton("Appointment Booking");
+        bookingBtn.addActionListener(this);
         
-        add(customerBtn);
+        add(bookingBtn);
         add(registerBtn);
         add(logoutBtn);
         
@@ -35,7 +37,10 @@ public class MgrMenu extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if(ae.getSource() == registerBtn){
+        if(ae.getSource() == bookingBtn){
+            //TODO put this in a variable
+            JOptionPane.showOptionDialog(this, "Book appointment for who?", "Choose option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
+        } else if(ae.getSource() == registerBtn){
             this.setVisible(false);
             Oodj.registerGUI.setVisible(true);
         } else if(ae.getSource() == logoutBtn){
