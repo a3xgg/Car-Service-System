@@ -131,7 +131,7 @@ public class Register extends JFrame implements ActionListener {
                     } else if(tech.isSelected()){
                         role = tech.getText();
                     }
-                    staffAccountDetails = new Staff(username, password,name,ic,email,phoneNumber,address,role);
+                    staffAccountDetails = new Staff(username, password,name,ic,email,phoneNumber,address,role,StatusAvailability.available);
                     Oodj.staff.add(staffAccountDetails);
                     JOptionPane.showMessageDialog(this, "Account successfully created!");
                     this.setVisible(false);

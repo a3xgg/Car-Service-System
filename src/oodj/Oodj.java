@@ -13,7 +13,7 @@ public class Oodj {
     public static TechMenu techMenuGUI;
     public static MgrMenu mgrMenuGUI;
     public static ArrayList<Staff> staff;
-    
+    public static ArrayList<Appointment> appointmentDetails;
     public static Staff loginAccount;
     
     public static void main(String[] args) {
@@ -34,8 +34,9 @@ public class Oodj {
                 String phone = s.nextLine();
                 String address = s.nextLine();
                 String department = s.nextLine();
+                StatusAvailability status = StatusAvailability.available;
                 s.nextLine();
-                Staff staffAccountDetails = new Staff(username, password, name,ic,email,phone,address,department);
+                Staff staffAccountDetails = new Staff(username, password, name,ic,email,phone,address,department,status);
                 staff.add(staffAccountDetails);
             }
         } catch(Exception e){}

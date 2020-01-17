@@ -6,13 +6,5 @@ one@technician.com
 12345
 Putra Heights
 Technician
-
-manager
-mgr
-Manager One
-MOne
-one@manager.com
-12346
-Putra Heights
-Manager
+available
 
