@@ -16,8 +16,7 @@ import user.*;
 
 public class Register extends JFrame implements ActionListener {
     
-    private Staff staffDetails;
-    private Account staffAccounts;
+    private Staff staffAccountDetails;
     private JButton registerBtn, backBtn;
     private JPasswordField pwdField,retypePwdField;
     private JLabel nameLbl, icLbl, emailLbl, phoneNumberLbl, mailingAddressLbl, usernameLbl, passwordLbl, retypePwdLbl;
@@ -96,8 +95,8 @@ public class Register extends JFrame implements ActionListener {
             boolean flag = false;
             String username = usernameTf.getText();
             //checks whether username exist, if yes 'Username Taken' else continue;
-            for(int i = 0; i < Oodj.userAccount.size(); i++){
-                if(username.equals(Oodj.userAccount.get(i).getUsername())){
+            for(int i = 0; i < Oodj.staff.size(); i++){
+                if(username.equals(Oodj.staff.get(i).getUsername())){
                     flag = true;
                     break;
                 }
@@ -132,10 +131,8 @@ public class Register extends JFrame implements ActionListener {
                     } else if(tech.isSelected()){
                         role = tech.getText();
                     }
-                    staffDetails = new Staff(name,ic,email,phoneNumber,address,role);
-                    staffAccounts = new Account(username,password,staffDetails);
-                    Oodj.staffDetails.add(staffDetails);
-                    Oodj.userAccount.add(staffAccounts);
+                    staffAccountDetails = new Staff(username, password,name,ic,email,phoneNumber,address,role);
+                    Oodj.staff.add(staffAccountDetails);
                     JOptionPane.showMessageDialog(this, "Account successfully created!");
                     this.setVisible(false);
                     Oodj.mgrMenuGUI.setVisible(true);

@@ -1,42 +1,18 @@
-Anderson Febrian
-C1107272
-cpcake@example.com
-01239123
-parkhill
-Manager
-
-Tech Expert
-T123123
-tech@expert.com
-01239123
-Tech Expert co
+technician
+tech
+Technician One
+TOne
+one@technician.com
+12345
+Putra Heights
 Technician
 
-John Cena
-CS12837
-jcena@example.com
-123123
-WWE
-Manager
-
-John Hammer
-C1107777
-jhammer@gmail.com
-123123
-DDDFF
-Technician
-
-Jim Cena
-123123
-123123@mail.com
-123123
-asdfasdf
-Technician
-
-Marshall Mathers
-123123
-asdfasdf@mail.com
-123123
-123123
+manager
+mgr
+Manager One
+MOne
+one@manager.com
+12346
+Putra Heights
 Manager
 

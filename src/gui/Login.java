@@ -58,21 +58,21 @@ public class Login extends JFrame implements ActionListener{
             boolean flag = false;
             String uname = username.getText();
             String pwd = new String(password.getPassword());
-            for(int i = 0; i < Oodj.userAccount.size(); i++){ // searches through the file for the username
-                if(uname.equals(Oodj.userAccount.get(i).getUsername())){
-                    Oodj.loginAccount = Oodj.userAccount.get(i); // if it gets the username, it will store the logged in user's 'object' into the loginAccount variable, else 'Wrong Credentials'
+            for(int i = 0; i < Oodj.staff.size(); i++){ // searches through the file for the username
+                if(uname.equals(Oodj.staff.get(i).getUsername())){
+                    Oodj.loginAccount = Oodj.staff.get(i); // if it gets the username, it will store the logged in user's 'object' into the loginAccount variable, else 'Wrong Credentials'
                     flag = true;
                     break;
                 } 
             }
             if(flag){ // if it got the result, next is to check the password
                 if(pwd.equals(Oodj.loginAccount.getPassword())){
-                    loggedInUser = new JLabel("Logged in as: " + Oodj.loginAccount.getStaff().getName());
-                    if(Oodj.loginAccount.getStaff().getDepartment().equals("Manager")){
+                    loggedInUser = new JLabel("Logged in as: " + Oodj.loginAccount.getName());
+                    if(Oodj.loginAccount.getDepartment().equals("Manager")){
                         this.setVisible(false);
                         Oodj.mgrMenuGUI.add(loggedInUser);
                         Oodj.mgrMenuGUI.setVisible(true);
-                    } else if(Oodj.loginAccount.getStaff().getDepartment().equals("Technician")){
+                    } else if(Oodj.loginAccount.getDepartment().equals("Technician")){
                         this.setVisible(false);
                         Oodj.techMenuGUI.add(loggedInUser);
                         Oodj.techMenuGUI.setVisible(true);
@@ -99,24 +99,18 @@ public class Login extends JFrame implements ActionListener{
             */
             try{
                 PrintWriter p = new PrintWriter("staff.txt");
-                for(int i = 0; i < Oodj.staffDetails.size(); i++){
-                    p.println(Oodj.staffDetails.get(i).getName());
-                    p.println(Oodj.staffDetails.get(i).getIcNumber());
-                    p.println(Oodj.staffDetails.get(i).getEmail());
-                    p.println(Oodj.staffDetails.get(i).getPhoneNumber());
-                    p.println(Oodj.staffDetails.get(i).getMailingAddress());
-                    p.println(Oodj.staffDetails.get(i).getDepartment());
+                for(int i = 0; i < Oodj.staff.size(); i++){
+                    p.println(Oodj.staff.get(i).getUsername());
+                    p.println(Oodj.staff.get(i).getPassword());
+                    p.println(Oodj.staff.get(i).getName());
+                    p.println(Oodj.staff.get(i).getIcNumber());
+                    p.println(Oodj.staff.get(i).getEmail());
+                    p.println(Oodj.staff.get(i).getPhoneNumber());
+                    p.println(Oodj.staff.get(i).getMailingAddress());
+                    p.println(Oodj.staff.get(i).getDepartment());
                     p.println();
                 }
                 p.close();
-                PrintWriter p2 = new PrintWriter("Account.txt");
-                for(int i = 0; i < Oodj.userAccount.size(); i++){
-                    p2.println(Oodj.userAccount.get(i).getUsername());
-                    p2.println(Oodj.userAccount.get(i).getPassword());
-                    p2.println(Oodj.userAccount.get(i).getStaff().getName());
-                    p2.println();
-                }
-                p2.close();
                 System.exit(0);
             } catch(Exception e){}
         }

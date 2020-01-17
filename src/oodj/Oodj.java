@@ -12,13 +12,12 @@ public class Oodj {
     public static Register registerGUI;
     public static TechMenu techMenuGUI;
     public static MgrMenu mgrMenuGUI;
-    public static ArrayList<Staff> staffDetails;
-    public static ArrayList<Account> userAccount;
-    public static Account loginAccount;
+    public static ArrayList<Staff> staff;
+    
+    public static Staff loginAccount;
     
     public static void main(String[] args) {
-        staffDetails = new ArrayList<Staff>();
-        userAccount = new ArrayList<Account>();
+        staff = new ArrayList<Staff>();
         loginGUI = new Login();
         registerGUI = new Register();
         techMenuGUI = new TechMenu();
@@ -27,6 +26,8 @@ public class Oodj {
         try{
             Scanner s = new Scanner(new File("staff.txt"));
             while(s.hasNext()){
+                String username = s.nextLine();
+                String password = s.nextLine();
                 String name = s.nextLine();
                 String ic = s.nextLine();
                 String email = s.nextLine();
@@ -34,28 +35,9 @@ public class Oodj {
                 String address = s.nextLine();
                 String department = s.nextLine();
                 s.nextLine();
-                Staff staffsDetails = new Staff(name,ic,email,phone,address,department);
-                staffDetails.add(staffsDetails);
+                Staff staffAccountDetails = new Staff(username, password, name,ic,email,phone,address,department);
+                staff.add(staffAccountDetails);
             }
         } catch(Exception e){}
-        try{
-            Scanner s2 = new Scanner(new File("Account.txt"));
-            while(s2.hasNext()){
-                String username = s2.nextLine();
-                String password = s2.nextLine();
-                String name = s2.nextLine();
-                s2.nextLine();
-                Staff accountOwner = null;
-                for(int i = 0; i < staffDetails.size(); i++){
-                    Staff temp = staffDetails.get(i);
-                    if(name.equals(temp.getName())){
-                        accountOwner = temp;
-                        break;
-                    }
-                }
-                Account account = new Account(username,password,accountOwner);
-                userAccount.add(account);
-            }
-        } catch(Exception e2){}
     } 
 }
