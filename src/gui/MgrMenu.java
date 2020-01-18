@@ -9,12 +9,13 @@ import javax.swing.JOptionPane;
 import oodj.*;
 
 public class MgrMenu extends JFrame implements ActionListener{
-    
-    private JButton registerBtn, logoutBtn, bookingBtn;
-    private String[] option = {"New Customer","Returning Customer"};
+    private RegisteredUser usersGUI;
+    private JButton registerBtn, logoutBtn, bookingBtn, registeredUser;
+    private Object[] option = {"New Customer","Returning Customer"};
     
     
     public MgrMenu(){
+        usersGUI = new RegisteredUser();
         setSize(500,150);
         setLocation(200,100);
         
@@ -27,8 +28,12 @@ public class MgrMenu extends JFrame implements ActionListener{
         bookingBtn = new JButton("Appointment Booking");
         bookingBtn.addActionListener(this);
         
+        registeredUser = new JButton("Registered Customer/Staff");
+        registeredUser.addActionListener(this);
+        
         add(bookingBtn);
         add(registerBtn);
+        add(registeredUser);
         add(logoutBtn);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,7 +44,15 @@ public class MgrMenu extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource() == bookingBtn){
             //TODO put this in a variable
-            JOptionPane.showOptionDialog(this, "Book appointment for who?", "Choose option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
+            int choice = JOptionPane.showOptionDialog(this, "Book appointment for who?", "Choose option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, option,option[0]);
+            if(choice == JOptionPane.YES_OPTION){
+                
+            } else if(choice == JOptionPane.NO_OPTION){
+                this.setVisible(false);
+                Oodj.bookingGUI.setVisible(true);
+            }
+        } else if(ae.getSource() == registeredUser){
+            usersGUI.setVisible(true);
         } else if(ae.getSource() == registerBtn){
             this.setVisible(false);
             Oodj.registerGUI.setVisible(true);

@@ -17,14 +17,16 @@ public class Login extends JFrame implements ActionListener{
     private final JButton loginBtn, quitBtn;
     private final JTextField username;
     private final JPasswordField password;
-    private final JLabel usrlbl, passlbl;
+    private final JLabel usrlbl, passlbl, message;
     public JLabel loggedInUser;
 
     public Login(){
 
-        setSize(300,140);
+        setSize(266,150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(100,200);
+        
+        message = new JLabel("APU Automotive Service Center\n");
 
         usrlbl = new JLabel("Username: ");
         username = new JTextField(15);
@@ -40,6 +42,7 @@ public class Login extends JFrame implements ActionListener{
         quitBtn = new JButton("Quit");
         quitBtn.addActionListener(this);
 
+        add(message);
         add(usrlbl);add(username);add(passlbl);add(password);
         add(loginBtn);add(quitBtn);
         
@@ -108,7 +111,6 @@ public class Login extends JFrame implements ActionListener{
                     p.println(Oodj.staff.get(i).getPhoneNumber());
                     p.println(Oodj.staff.get(i).getMailingAddress());
                     p.println(Oodj.staff.get(i).getDepartment());
-                    p.println(Oodj.staff.get(i).getStatus());
                     p.println();
                 }
                 p.close();

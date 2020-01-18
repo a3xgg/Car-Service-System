@@ -131,9 +131,22 @@ public class Register extends JFrame implements ActionListener {
                     } else if(tech.isSelected()){
                         role = tech.getText();
                     }
-                    staffAccountDetails = new Staff(username, password,name,ic,email,phoneNumber,address,role,StatusAvailability.available);
+                    staffAccountDetails = new Staff(username, password,name,ic,email,phoneNumber,address,role);
                     Oodj.staff.add(staffAccountDetails);
                     JOptionPane.showMessageDialog(this, "Account successfully created!");
+                    //empties all text field
+                    usernameTf.setText(null);
+                    pwdField.setText(null);
+                    retypePwdField.setText(null);
+                    nameTf.setText(null);
+                    icTf.setText(null);
+                    emailTf.setText(null);
+                    phoneNumberTf.setText(null);
+                    mailingAddressTf.setText(null);
+                    mgr.setSelected(false);
+                    tech.setSelected(false);
+                    bg.clearSelection();
+                    
                     this.setVisible(false);
                     Oodj.mgrMenuGUI.setVisible(true);
                 }

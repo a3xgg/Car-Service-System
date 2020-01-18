@@ -1,10 +1,54 @@
+manager
+mgr
+Manager One
+MOne
+one@manager.com
+12345
+Putra Heights
+Manager
+
 technician
 tech
 Technician One
 TOne
 one@technician.com
-12345
+12346
 Putra Heights
 Technician
-available
+
+techniciantwo
+tech
+Technician Two
+TTwo
+two@technician.com
+123457
+Putra Heights
+Technician
+
+technicianthree
+tech
+Technician Three
+TThree
+three@technician.com
+123458
+Putra Heights
+Technician
+
+technicianfour
+tech
+Technician Four
+TFour
+four@technician.com
+123458
+Putra Heights
+Technician
+
+technicianfive
+tech
+Technician Five
+TFive
+five@technician.com
+123458
+Putra Heights
+Technician
 
