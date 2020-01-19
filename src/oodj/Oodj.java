@@ -8,12 +8,12 @@ import user.*;
 
 public class Oodj {
     //All GUI
-    public static RegisteredUser userInformationGUI;
     public static Login loginGUI;
     public static Register registerGUI;
     public static TechMenu techMenuGUI;
     public static MgrMenu mgrMenuGUI;
     public static AppointmentBooking bookingGUI;
+    //
     public static ArrayList<Staff> staff;
     public static ArrayList<Appointment> appointmentDetails;
     public static Staff loginAccount;
@@ -42,5 +42,5 @@ public class Oodj {
                 staff.add(staffAccountDetails);
             }
         } catch(Exception e){}
-    } 
+    }
 }

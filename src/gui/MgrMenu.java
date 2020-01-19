@@ -3,19 +3,27 @@ package gui;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import oodj.*;
+import user.Staff;
 
 public class MgrMenu extends JFrame implements ActionListener{
-    private RegisteredUser usersGUI;
+    
+    private UserList userGUI;
+
+    private String name, ic, email, phone, address, department;
+    
     private JButton registerBtn, logoutBtn, bookingBtn, registeredUser;
     private Object[] option = {"New Customer","Returning Customer"};
     
     
     public MgrMenu(){
-        usersGUI = new RegisteredUser();
         setSize(500,150);
         setLocation(200,100);
         
@@ -52,7 +60,8 @@ public class MgrMenu extends JFrame implements ActionListener{
                 Oodj.bookingGUI.setVisible(true);
             }
         } else if(ae.getSource() == registeredUser){
-            usersGUI.setVisible(true);
+            userGUI = new UserList();
+            userGUI.setVisible(true);
         } else if(ae.getSource() == registerBtn){
             this.setVisible(false);
             Oodj.registerGUI.setVisible(true);
@@ -62,4 +71,5 @@ public class MgrMenu extends JFrame implements ActionListener{
             Oodj.loginGUI.setVisible(true);
         }
     }
+    
 }
