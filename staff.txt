@@ -2,7 +2,7 @@ manager
 mgr
 Manager One
 MOne
-one@manager.com
+manager@one.com
 12345
 Putra Heights
 Manager

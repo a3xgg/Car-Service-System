@@ -10,7 +10,7 @@ import oodj.*;
 
 public class TechMenu extends JFrame implements ActionListener{
     
-    private JButton checkSchedule, logout;
+    private JButton checkSchedule, logout, editProfile;
     
     public TechMenu(){
         
@@ -19,9 +19,13 @@ public class TechMenu extends JFrame implements ActionListener{
         
         logout = new JButton("Logout");
         logout.addActionListener(this);
+        
+        editProfile = new JButton("Edit Profile");
+        editProfile.addActionListener(this);
 
         add(checkSchedule);
         add(logout);
+        add(editProfile);
         
         setSize(200,200);
         setLocation(200,100);
@@ -37,6 +41,9 @@ public class TechMenu extends JFrame implements ActionListener{
             this.setVisible(false);
             Oodj.loginGUI.loggedInUser.setText(null); //clear the logged in user text for techmenu, if not previous logged in text will still show.
             Oodj.loginGUI.setVisible(true);
-        }    
+        } else if(ae.getSource() == editProfile){
+            Profile profilePage = new Profile();
+            profilePage.setVisible(true);
+        }
     }  
 }

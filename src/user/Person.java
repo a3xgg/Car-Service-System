@@ -45,4 +45,28 @@ public class Person {
         return password;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setIcNumber(String icNumber) {
+        this.icNumber = icNumber;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setMailingAddress(String mailingAddress) {
+        this.mailingAddress = mailingAddress;
+    }
+
 }
