@@ -58,38 +58,11 @@ public class Login extends JFrame implements ActionListener{
         if wrong username and password is entered, program will show 'Wrong Credentials'
         */
         if(ae.getSource() == loginBtn || ae.getSource() == username || ae.getSource() == password){
-            boolean flag = false;
             String uname = username.getText();
             String pwd = new String(password.getPassword());
-            for(int i = 0; i < Oodj.staff.size(); i++){ // searches through the file for the username
-                if(uname.equals(Oodj.staff.get(i).getUsername())){
-                    Oodj.loginAccount = Oodj.staff.get(i); // if it gets the username, it will store the logged in user's 'object' into the loginAccount variable, else 'Wrong Credentials'
-                    flag = true;
-                    break;
-                } 
-            }
-            if(flag){ // if it got the result, next is to check the password
-                if(pwd.equals(Oodj.loginAccount.getPassword())){
-                    loggedInUser = new JLabel("Logged in as: " + Oodj.loginAccount.getName());
-                    if(Oodj.loginAccount.getDepartment().equals("Manager")){
-                        this.setVisible(false);
-                        Oodj.mgrMenuGUI.add(loggedInUser);
-                        Oodj.mgrMenuGUI.setVisible(true);
-                    } else if(Oodj.loginAccount.getDepartment().equals("Technician")){
-                        this.setVisible(false);
-                        Oodj.techMenuGUI.add(loggedInUser);
-                        Oodj.techMenuGUI.setVisible(true);
-                    }
-                } else{
-                    if(pwd.isEmpty()){
-                        JOptionPane.showMessageDialog(this, "Please enter your password!");
-                    } else{
-                        JOptionPane.showMessageDialog(this, "Wrong password!");
-                    }
-                }
-            } else{
-                JOptionPane.showMessageDialog(this, "Wrong Credentials!");
-            }
+            
+            verifyAccount(uname, pwd);
+            
             //Sets all text and password field to null if either credentials is incorrect or correct
             username.setText(null);
             password.setText(null);
@@ -119,4 +92,40 @@ public class Login extends JFrame implements ActionListener{
         }
     }
 
+    public void verifyAccount(String uname, String pwd){
+        boolean flag = false;
+        for(int i = 0; i < Oodj.staff.size(); i++){ // searches through the file for the username
+            if(uname.equals(Oodj.staff.get(i).getUsername())){
+                Oodj.loginAccount = Oodj.staff.get(i); // if it gets the username, it will store the logged in user's 'object' into the loginAccount variable, else 'Wrong Credentials'
+                flag = true;
+                break;
+            } 
+        }
+        if(flag){ // if it got the result, next is to check the password
+            if(pwd.equals(Oodj.loginAccount.getPassword())){
+                accessRights();
+            } else{
+                if(pwd.isEmpty()){
+                    JOptionPane.showMessageDialog(this, "Please enter your password!");
+                } else{
+                    JOptionPane.showMessageDialog(this, "Wrong password!");
+                }
+            }
+        } else{
+            JOptionPane.showMessageDialog(this, "Wrong Credentials!");
+        }
+    }
+    
+    public void accessRights(){
+        loggedInUser = new JLabel("Logged in as: " + Oodj.loginAccount.getName());
+        if(Oodj.loginAccount.getDepartment().equals("Manager")){
+            this.setVisible(false);
+            Oodj.mgrMenuGUI.add(loggedInUser);
+            Oodj.mgrMenuGUI.setVisible(true);
+        } else if(Oodj.loginAccount.getDepartment().equals("Technician")){
+            this.setVisible(false);
+            Oodj.techMenuGUI.add(loggedInUser);
+            Oodj.techMenuGUI.setVisible(true);
+        }
+    }
 }

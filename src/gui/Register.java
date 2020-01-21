@@ -151,8 +151,14 @@ public class Register extends JFrame implements ActionListener {
                     Oodj.mgrMenuGUI.setVisible(true);
                 }
             }
-            
         }
     }
     
+    public void checkDuplicateUsername(String username){
+        
+    }
+    
+    public void verifyPassword(String password, String retypePassword){
+        
+    }
 }

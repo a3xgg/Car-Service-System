@@ -22,8 +22,10 @@ public class UserList extends JFrame implements ActionListener {
     private JTable staffTable, customerTable;
     private JLabel staffLbl, customerLbl;
     
-    private DefaultTableModel staffModel = new DefaultTableModel(columnHeader[0],0);
-    private DefaultTableModel customerModel = new DefaultTableModel(columnHeader[1],25);
+    private final DefaultTableModel staffModel = new DefaultTableModel(columnHeader[0],0);
+    private final DefaultTableModel customerModel = new DefaultTableModel(columnHeader[1],25);
+    
+    private JScrollPane staffScrollable, customerScrollable;
     
     public UserList(){  
         getUserData(Oodj.staff);
@@ -33,10 +35,18 @@ public class UserList extends JFrame implements ActionListener {
         staffLbl = new JLabel("Staff");
         staffTable = new JTable(staffModel);
         
-        JScrollPane staffScrollable = new JScrollPane(staffTable);
+        staffScrollable = new JScrollPane(staffTable);
+        
+        customerLbl = new JLabel("Customer");
+        customerTable = new JTable(customerModel);
+        
+        customerScrollable = new JScrollPane(customerTable);
         
         add(staffLbl);
         add(staffScrollable);
+        
+        add(customerLbl);
+        add(customerScrollable);
         
         setLayout(new FlowLayout());
     }
@@ -46,7 +56,7 @@ public class UserList extends JFrame implements ActionListener {
         
     }
     
-    public void getUserData(ArrayList<Staff> staff){
+    public final void getUserData(ArrayList<Staff> staff){
         for(int i = 0; i < staff.size(); i++){
             name = staff.get(i).getName();
             ic = staff.get(i).getIcNumber();
@@ -55,7 +65,6 @@ public class UserList extends JFrame implements ActionListener {
             address = staff.get(i).getMailingAddress();
             department = staff.get(i).getDepartment();
             Object[] detail = {name,ic,email,phone,address,department};
-            System.out.println(detail);
             staffModel.addRow(detail);
         }
     }

@@ -19,7 +19,7 @@ public class MgrMenu extends JFrame implements ActionListener{
 
     private String name, ic, email, phone, address, department;
     
-    private JButton registerBtn, logoutBtn, bookingBtn, registeredUser;
+    private JButton registerBtn, logoutBtn, bookingBtn, registeredUser, editProfile;
     private Object[] option = {"New Customer","Returning Customer"};
     
     
@@ -39,10 +39,14 @@ public class MgrMenu extends JFrame implements ActionListener{
         registeredUser = new JButton("Registered Customer/Staff");
         registeredUser.addActionListener(this);
         
+        editProfile = new JButton("Edit Profile");
+        editProfile.addActionListener(this);
+        
         add(bookingBtn);
         add(registerBtn);
         add(registeredUser);
         add(logoutBtn);
+        add(editProfile);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout(0,20,20));
@@ -69,6 +73,9 @@ public class MgrMenu extends JFrame implements ActionListener{
             this.setVisible(false);
             Oodj.loginGUI.loggedInUser.setText(null); //clear the logged in user text for mgrMenu, if not previous logged in text will still show.
             Oodj.loginGUI.setVisible(true);
+        } else if(ae.getSource() == editProfile){
+            Profile profilePage = new Profile();
+            profilePage.setVisible(true);
         }
     }
     

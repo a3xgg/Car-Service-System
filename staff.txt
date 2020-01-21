@@ -52,3 +52,12 @@ five@technician.com
 Putra Heights
 Technician
 
+techniciansix
+tech
+Technician Six
+TSix
+six@technician.com
+12342
+Putra Heights
+Technician
+
