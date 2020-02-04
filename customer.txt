@@ -1,0 +1,28 @@
+101
+JOHN
+asdf
+asdf
+asdf
+asdf
+
+102
+asdf
+asdf
+asdf
+asdf
+asdf
+
+103
+Mark Hamilton
+MHamilton
+hamilton@mail.com
+123456
+Putra Heights
+
+104
+Anderson Febrian
+C1107272
+andersonfebrian@yahoo.com
+01126840785
+Putra Heights
+

@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import oodj.Oodj;
+import user.Customer;
 import user.Staff;
 
 public class UserList extends JFrame implements ActionListener {
@@ -18,17 +19,20 @@ public class UserList extends JFrame implements ActionListener {
         {"Cust ID","Name","IC","E-mail","Phone Number","Address"}};
     
     private String name, ic, email, phone, address, department;
+    private int custID;
     
     private JTable staffTable, customerTable;
     private JLabel staffLbl, customerLbl;
     
     private final DefaultTableModel staffModel = new DefaultTableModel(columnHeader[0],0);
-    private final DefaultTableModel customerModel = new DefaultTableModel(columnHeader[1],25);
+    private final DefaultTableModel customerModel = new DefaultTableModel(columnHeader[1],0);
     
     private JScrollPane staffScrollable, customerScrollable;
     
     public UserList(){  
-        getUserData(Oodj.staff);
+        getStaffData(Oodj.staff);
+        getCustomerData(Oodj.customer);
+        
         setSize(1500,500);
         setLocation(300,250);
         
@@ -56,7 +60,7 @@ public class UserList extends JFrame implements ActionListener {
         
     }
     
-    public final void getUserData(ArrayList<Staff> staff){
+    public final void getStaffData(ArrayList<Staff> staff){
         for(int i = 0; i < staff.size(); i++){
             name = staff.get(i).getName();
             ic = staff.get(i).getIcNumber();
@@ -66,6 +70,19 @@ public class UserList extends JFrame implements ActionListener {
             department = staff.get(i).getDepartment();
             Object[] detail = {name,ic,email,phone,address,department};
             staffModel.addRow(detail);
+        }
+    }
+    
+    public final void getCustomerData(ArrayList<Customer> customer){
+        for(int i = 0; i < customer.size(); i++){
+            custID = customer.get(i).getCustID();
+            name = customer.get(i).getName();
+            ic = customer.get(i).getIcNumber();
+            email = customer.get(i).getEmail();
+            phone = customer.get(i).getPhoneNumber();
+            address = customer.get(i).getMailingAddress();
+            Object[] detail = {custID,name,ic,email,phone,address};
+            customerModel.addRow(detail);
         }
     }
 }

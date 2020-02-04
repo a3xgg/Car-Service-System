@@ -85,10 +85,24 @@ public class Login extends JFrame implements ActionListener{
                     p.println(Oodj.staff.get(i).getMailingAddress());
                     p.println(Oodj.staff.get(i).getDepartment());
                     p.println();
+                    
                 }
                 p.close();
-                System.exit(0);
             } catch(Exception e){}
+            try{
+                PrintWriter p = new PrintWriter("customer.txt");
+                for(int i = 0; i < Oodj.customer.size(); i++){
+                    p.println(Oodj.customer.get(i).getCustID());
+                    p.println(Oodj.customer.get(i).getName());
+                    p.println(Oodj.customer.get(i).getIcNumber());
+                    p.println(Oodj.customer.get(i).getEmail());
+                    p.println(Oodj.customer.get(i).getPhoneNumber());
+                    p.println(Oodj.customer.get(i).getMailingAddress());
+                    p.println();
+                }
+                p.close();
+            } catch (Exception e){}
+            System.exit(0);
         }
     }
 

@@ -92,6 +92,5 @@ public class Profile extends JFrame implements ActionListener{
         } else if(ae.getSource() == discardChanges){
             this.setVisible(false);
         }
-    }
-    
+    } 
 }

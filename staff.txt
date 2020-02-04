@@ -2,7 +2,7 @@ manager
 mgr
 Manager One
 MOne
-manager@one.com
+one@manager.com
 12345
 Putra Heights
 Manager
@@ -10,54 +10,18 @@ Manager
 technician
 tech
 Technician One
-TOne
+Tone
 one@technician.com
-12346
+123456
 Putra Heights
 Technician
 
-techniciantwo
-tech
-Technician Two
-TTwo
-two@technician.com
-123457
-Putra Heights
-Technician
-
-technicianthree
-tech
-Technician Three
-TThree
-three@technician.com
-123458
-Putra Heights
-Technician
-
-technicianfour
-tech
-Technician Four
-TFour
-four@technician.com
-123458
-Putra Heights
-Technician
-
-technicianfive
-tech
-Technician Five
-TFive
-five@technician.com
-123458
-Putra Heights
-Technician
-
-techniciansix
-tech
-Technician Six
-TSix
-six@technician.com
-12342
-Putra Heights
-Technician
+cool
+mgr
+asdf
+asdf
+asdf
+asdf
+asdf
+Manager
 

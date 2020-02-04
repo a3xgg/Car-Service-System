@@ -23,11 +23,11 @@ public class Register extends JFrame implements ActionListener {
     private JTextField nameTf, icTf, emailTf, phoneNumberTf, mailingAddressTf, usernameTf;
     private JRadioButton mgr, tech;
     private ButtonGroup bg;
-
+    private String password,retypepw, username;
+    private boolean flag = false;
     public Register(){
         setSize(210,570);
         setLocation(100, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         usernameLbl = new JLabel("Username: ");
         usernameTf = new JTextField(15);
@@ -92,73 +92,75 @@ public class Register extends JFrame implements ActionListener {
             phoneNumberTf.setText(null);
             mailingAddressTf.setText(null);
         } else if(ae.getSource() == registerBtn){
-            boolean flag = false;
-            String username = usernameTf.getText();
+            
+            username = usernameTf.getText();
             //checks whether username exist, if yes 'Username Taken' else continue;
-            for(int i = 0; i < Oodj.staff.size(); i++){
-                if(username.equals(Oodj.staff.get(i).getUsername())){
-                    flag = true;
-                    break;
-                }
-            }
+            checkDuplicateUsername(username);
             if(flag){
                 JOptionPane.showMessageDialog(this, "Username is taken");
+                flag = false;
             } else{
-                String password = new String(pwdField.getPassword());
-                String retypepw = new String(retypePwdField.getPassword());
-                /*
-                checks password match
-                if does not match 'Password does not match'
-                else continue
-                */
-                if(!(password.equals(retypepw))){
-                    JOptionPane.showMessageDialog(this, "Password does not match!");
-                    pwdField.setText(null);
-                    retypePwdField.setText(null);
-                }
-                String name = nameTf.getText();
-                String ic = icTf.getText();
-                String email = emailTf.getText();
-                String phoneNumber = phoneNumberTf.getText();
-                String address = mailingAddressTf.getText();
-                String role = null;
-                if(username.isEmpty() || password.isEmpty() || retypepw.isEmpty() || name.isEmpty() || ic.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()){
-                    //checks whether there are some fields that are left empty
-                    JOptionPane.showMessageDialog(this, "Some fields are empty!");
-                } else{
-                    if(mgr.isSelected()){
-                        role = mgr.getText();
-                    } else if(tech.isSelected()){
-                        role = tech.getText();
-                    }
-                    staffAccountDetails = new Staff(username, password,name,ic,email,phoneNumber,address,role);
-                    Oodj.staff.add(staffAccountDetails);
-                    JOptionPane.showMessageDialog(this, "Account successfully created!");
-                    //empties all text field
-                    usernameTf.setText(null);
-                    pwdField.setText(null);
-                    retypePwdField.setText(null);
-                    nameTf.setText(null);
-                    icTf.setText(null);
-                    emailTf.setText(null);
-                    phoneNumberTf.setText(null);
-                    mailingAddressTf.setText(null);
-                    mgr.setSelected(false);
-                    tech.setSelected(false);
-                    bg.clearSelection();
-                    
-                    this.setVisible(false);
-                    Oodj.mgrMenuGUI.setVisible(true);
-                }
+                password = new String(pwdField.getPassword());
+                retypepw = new String(retypePwdField.getPassword());
+                verifyPassword(password,retypepw);
+                registerStaff();
             }
         }
     }
     
+    public void clearFields(){
+        usernameTf.setText(null);
+        pwdField.setText(null);
+        retypePwdField.setText(null);
+        nameTf.setText(null);
+        icTf.setText(null);
+        emailTf.setText(null);
+        phoneNumberTf.setText(null);
+        mailingAddressTf.setText(null);
+        mgr.setSelected(false);
+        tech.setSelected(false);
+        bg.clearSelection();
+    }
+    
     public void checkDuplicateUsername(String username){
-        
+        for(int i = 0; i < Oodj.staff.size(); i++){
+            if(username.equals(Oodj.staff.get(i).getUsername())){
+                flag = true;
+                break;
+            }
+        }
     }
     
     public void verifyPassword(String password, String retypePassword){
-        
+        if(!(password.equals(retypepw))){
+            JOptionPane.showMessageDialog(this, "Password does not match!");
+            pwdField.setText(null);
+            retypePwdField.setText(null);
+        }
+    }
+    
+    public void registerStaff(){
+        String name = nameTf.getText();
+        String ic = icTf.getText();
+        String email = emailTf.getText();
+        String phoneNumber = phoneNumberTf.getText();
+        String address = mailingAddressTf.getText();
+        String role = null;
+        if(username.isEmpty() || password.isEmpty() || retypepw.isEmpty() || name.isEmpty() || ic.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()){
+            //checks whether there are some fields that are left empty
+            JOptionPane.showMessageDialog(this, "Some fields are empty!");
+        } else{
+            if(mgr.isSelected()){
+                role = mgr.getText();
+            } else if(tech.isSelected()){
+                role = tech.getText();
+            }
+            staffAccountDetails = new Staff(username, password,name,ic,email,phoneNumber,address,role);
+            Oodj.staff.add(staffAccountDetails);
+            JOptionPane.showMessageDialog(this, "Account successfully created!");
+            clearFields();
+            this.setVisible(false);
+            Oodj.mgrMenuGUI.setVisible(true);
+        }
     }
 }

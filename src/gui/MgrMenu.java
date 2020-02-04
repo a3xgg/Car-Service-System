@@ -3,28 +3,22 @@ package gui;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import oodj.*;
-import user.Staff;
 
 public class MgrMenu extends JFrame implements ActionListener{
     
     private UserList userGUI;
 
-    private String name, ic, email, phone, address, department;
-    
     private JButton registerBtn, logoutBtn, bookingBtn, registeredUser, editProfile;
     private Object[] option = {"New Customer","Returning Customer"};
     
+    public AppointmentBooking bookingGUI;
     
     public MgrMenu(){
-        setSize(500,150);
+        setSize(500,200);
         setLocation(200,100);
         
         registerBtn = new JButton("Staff Registration");
@@ -58,10 +52,12 @@ public class MgrMenu extends JFrame implements ActionListener{
             //TODO put this in a variable
             int choice = JOptionPane.showOptionDialog(this, "Book appointment for who?", "Choose option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, option,option[0]);
             if(choice == JOptionPane.YES_OPTION){
-                
+                this.setVisible(false);
+                Oodj.registerCustomerGUI.setVisible(true);
             } else if(choice == JOptionPane.NO_OPTION){
                 this.setVisible(false);
-                Oodj.bookingGUI.setVisible(true);
+                bookingGUI = new AppointmentBooking();
+                bookingGUI.setVisible(true);
             }
         } else if(ae.getSource() == registeredUser){
             userGUI = new UserList();
