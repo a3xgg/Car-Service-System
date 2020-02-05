@@ -11,6 +11,7 @@ import oodj.*;
 public class MgrMenu extends JFrame implements ActionListener{
     
     private UserList userGUI;
+    private RegisterCustomer regCustGUI;
 
     private JButton registerBtn, logoutBtn, bookingBtn, registeredUser, editProfile;
     private Object[] option = {"New Customer","Returning Customer"};
@@ -52,8 +53,8 @@ public class MgrMenu extends JFrame implements ActionListener{
             //TODO put this in a variable
             int choice = JOptionPane.showOptionDialog(this, "Book appointment for who?", "Choose option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, option,option[0]);
             if(choice == JOptionPane.YES_OPTION){
-                this.setVisible(false);
-                Oodj.registerCustomerGUI.setVisible(true);
+                regCustGUI = new RegisterCustomer();
+                regCustGUI.setVisible(true);
             } else if(choice == JOptionPane.NO_OPTION){
                 this.setVisible(false);
                 bookingGUI = new AppointmentBooking();

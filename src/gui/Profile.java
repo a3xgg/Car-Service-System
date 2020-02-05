@@ -5,20 +5,24 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import oodj.Oodj;
+import interfaces.*;
 
-public class Profile extends JFrame implements ActionListener{
+public class Profile extends Register implements ActionListener, UserAccountVerification{
     
     private JButton saveChanges, discardChanges;
-    private JLabel username,password,name,ic,email,phone,address,department;
+    private JLabel username,password,name,ic,email,phone,address,department,retypepwLbl;
     
     private JTextField usernameTf, icTf, emailTf, phoneTf, addressTf;
-    private JPasswordField passwordTf;
+    private JPasswordField passwordTf, retypepwTf;
+    
+    private String uname, passwd,retypepw,icNumber,emailStr, phoneNumber, addressStr;
 
     public Profile(){
-        setSize(500,500);
+        setSize(700,400);
         setLocation(200,100);
 
         saveChanges = new JButton("Save changes");
@@ -41,6 +45,12 @@ public class Profile extends JFrame implements ActionListener{
         
         passwordTf = new JPasswordField(Oodj.loginAccount.getPassword());
         passwordTf.setBounds(90, 40, 200, 25);
+        
+        retypepwLbl = new JLabel("Retype Password: ");
+        retypepwLbl.setBounds(300, 40, 200, 30);
+        
+        retypepwTf = new JPasswordField(Oodj.loginAccount.getPassword());
+        retypepwTf.setBounds(420,40,200,25);
         
         name = new JLabel("Name: " + Oodj.loginAccount.getName());
         name.setBounds(10,70,200,30);
@@ -73,7 +83,7 @@ public class Profile extends JFrame implements ActionListener{
         department.setBounds(10,210,200,30);
         
         add(username);add(usernameTf);
-        add(password);add(passwordTf);
+        add(password);add(passwordTf);add(retypepwLbl);add(retypepwTf);
         add(name);
         add(ic);add(icTf);
         add(email);add(emailTf);
@@ -88,9 +98,65 @@ public class Profile extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource() == saveChanges){
-            Oodj.loginAccount.setEmail(emailTf.getText());
+            editProfile();
         } else if(ae.getSource() == discardChanges){
             this.setVisible(false);
         }
     } 
+    
+    public void editProfile(){
+        boolean flag = false;
+        uname = usernameTf.getText();
+        if(!(usernameTf.getText().equals(Oodj.loginAccount.getUsername()))){
+            if(checkDuplicateUsername(uname)){
+                JOptionPane.showMessageDialog(this, "Username has been taken!");
+                flag = true;
+            } else{
+                Oodj.loginAccount.setUsername(uname);
+            }
+        }
+        passwd = new String(passwordTf.getPassword());
+        retypepw = new String(retypepwTf.getPassword());
+        if(verifyPassword(passwd,retypepw)){
+            JOptionPane.showMessageDialog(this,"Password does not match");
+            flag = true;
+        } else{
+            Oodj.loginAccount.setPassword(passwd);
+        }
+        emailStr = emailTf.getText();
+        if(validateEmail(emailStr)){
+            Oodj.loginAccount.setEmail(emailStr);
+        } else{
+            JOptionPane.showMessageDialog(this,"Please ensure email is in correct format!");
+            flag = true;
+        }
+        icNumber = icTf.getText();
+        phoneNumber = phoneTf.getText();
+        addressStr = addressTf.getText();
+        Oodj.loginAccount.setIcNumber(icNumber);
+        Oodj.loginAccount.setMailingAddress(addressStr);
+        Oodj.loginAccount.setPhoneNumber(phoneNumber);
+        if(!flag){
+            JOptionPane.showMessageDialog(this, "Successfully updated!");
+            this.setVisible(false);
+        }
+    }
+    
+    @Override
+    public boolean verifyPassword(String password, String retypepw){
+        if(!(password.equals(retypepw))){
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+     public boolean checkDuplicateUsername(String username){
+        for(int i = 0; i < Oodj.staff.size(); i++){
+            if(username.equals(Oodj.staff.get(i).getUsername())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

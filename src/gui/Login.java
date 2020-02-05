@@ -58,6 +58,7 @@ public class Login extends JFrame implements ActionListener{
         if wrong username and password is entered, program will show 'Wrong Credentials'
         */
         if(ae.getSource() == loginBtn || ae.getSource() == username || ae.getSource() == password){
+            //Oodj.mgrMenuGUI.setVisible(true); //for debugging purpose
             String uname = username.getText();
             String pwd = new String(password.getPassword());
             
@@ -98,6 +99,21 @@ public class Login extends JFrame implements ActionListener{
                     p.println(Oodj.customer.get(i).getEmail());
                     p.println(Oodj.customer.get(i).getPhoneNumber());
                     p.println(Oodj.customer.get(i).getMailingAddress());
+                    p.println();
+                }
+                p.close();
+            } catch (Exception e){}
+            try{
+                PrintWriter p = new PrintWriter("appointment.txt");
+                for(int i = 0; i < Oodj.appointmentDetails.size(); i++){
+                    p.println(Oodj.appointmentDetails.get(i).getAppointmentID());
+                    p.println(Oodj.appointmentDetails.get(i).getAppointmentDate());
+                    p.println(Oodj.appointmentDetails.get(i).getAppointmentStartTime());
+                    p.println(Oodj.appointmentDetails.get(i).getAppointmentEndTime());
+                    p.println(Oodj.appointmentDetails.get(i).getServiceType());
+                    p.println(Oodj.appointmentDetails.get(i).getCustomer().getName());
+                    p.println(Oodj.appointmentDetails.get(i).getStaff().getName());
+                    p.println(Oodj.appointmentDetails.get(i).getAppointmentStatus());
                     p.println();
                 }
                 p.close();

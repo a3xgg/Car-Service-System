@@ -10,33 +10,33 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import oodj.*;
 import user.Customer;
+import interfaces.*;
 
-public class RegisterCustomer extends JFrame implements ActionListener{
+public class RegisterCustomer extends JFrame implements ActionListener, Registration, PlainJTextField{
     
-    private JButton registerBtn, backBtn;
-    private JLabel nameLbl, icLbl, emailLbl, phoneNumberLbl, mailingAddressLbl;
-    private JTextField nameTf, icTf, emailTf, phoneNumberTf, mailingAddressTf;
+    private final JButton registerBtn, backBtn;
+    private final JLabel name, ic, email, phoneNumber, mailingAddress;
+    private final JTextField nameTf, icTf, emailTf, phoneNumberTf, mailingAddressTf;
     private Customer customerDetails;
     private AppointmentBooking bookingGUI;
     
     public RegisterCustomer(){
         setSize(210,570);
         setLocation(100, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        nameLbl = new JLabel("Full Name: ");
+        name = new JLabel("Full Name: ");
         nameTf = new JTextField(15);
         
-        icLbl = new JLabel("IC/Passport: ");
+        ic = new JLabel("IC/Passport: ");
         icTf = new JTextField(15);
         
-        emailLbl = new JLabel("E-mail: ");
+        email = new JLabel("E-mail: ");
         emailTf = new JTextField(15);
         
-        phoneNumberLbl = new JLabel("Phone No: ");
+        phoneNumber = new JLabel("Phone No: ");
         phoneNumberTf = new JTextField(15);
         
-        mailingAddressLbl = new JLabel("Address: ");
+        mailingAddress = new JLabel("Address: ");
         mailingAddressTf = new JTextField(15);
         
         registerBtn = new JButton("Register Customer");
@@ -45,36 +45,35 @@ public class RegisterCustomer extends JFrame implements ActionListener{
         backBtn = new JButton("Back");
         backBtn.addActionListener(this);
         
-        add(nameLbl);add(nameTf);
-        add(icLbl);add(icTf);
-        add(emailLbl);add(emailTf);
-        add(phoneNumberLbl);add(phoneNumberTf);
-        add(mailingAddressLbl);add(mailingAddressTf);
+        add(name);add(nameTf);
+        add(ic);add(icTf);
+        add(email);add(emailTf);
+        add(phoneNumber);add(phoneNumberTf);
+        add(mailingAddress);add(mailingAddressTf);
         add(registerBtn);add(backBtn);
         
         setLayout(new FlowLayout(FlowLayout.LEFT,10,10));
         setVisible(false);
     }
-
     @Override
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource() == registerBtn){
-            registerCustomer();
+            registerUser();
         } else if(ae.getSource() == backBtn){
             this.setVisible(false);
             Oodj.mgrMenuGUI.setVisible(true);
         }
-    }  
-    
-    public void clearFields(){
+    }
+    @Override
+    public void clearTextFields(){
         nameTf.setText(null);
         icTf.setText(null);
         emailTf.setText(null);
         phoneNumberTf.setText(null);
         mailingAddressTf.setText(null);
     }
-    
-    public void registerCustomer(){
+    @Override
+    public void registerUser(){
         int id;
         if(Oodj.customer.isEmpty()){
             id = 101;
@@ -93,7 +92,7 @@ public class RegisterCustomer extends JFrame implements ActionListener{
         } else{
             customerDetails = new Customer(id,name,ic,email,phone,address);
             Oodj.customer.add(customerDetails);
-            clearFields();
+            clearTextFields();
             JOptionPane.showMessageDialog(this,"Successfully Registered Customer!");
             this.setVisible(false);
             bookingGUI = new AppointmentBooking();
