@@ -112,10 +112,11 @@ public class AppointmentBooking extends JFrame implements ActionListener{
         add(datePicker);
         add(time);
         add(timePicker);
-        add(endService);
-        add(endLbl);
         add(serviceTypeLbl);
         add(serviceType);
+        add(endService);
+        add(endLbl);
+        
         
         add(serviceHourLbl);
         add(serviceDuration);

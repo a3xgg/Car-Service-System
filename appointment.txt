@@ -7,3 +7,30 @@ Anderson Febrian
 Technician One
 Not Completed
 
+90002
+2020-02-07
+10:00
+11:00
+Normal Service
+Low Tuck Weng
+Technician One
+Not Completed
+
+90003
+2020-02-06
+16:00:14
+17:00:14
+Normal Service
+Anderson Febrian
+Technician Two
+Not Completed
+
+90004
+2020-02-28
+10:00
+13:00
+Major Service
+Low Tuck Weng
+Technician Five
+Not Completed
+

@@ -5,12 +5,9 @@
         <group>
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/user/Technician.java</file>
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/oodj/Oodj.java</file>
-            <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/interfaces/UsernameVerification.java</file>
-            <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/interfaces/UserAccountVerification.java</file>
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/gui/RegisterCustomer.java</file>
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/appointment.txt</file>
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/user/Appointment.java</file>
-            <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/gui/Profile.java</file>
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/user/Staff.java</file>
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/user/Person.java</file>
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/staff.txt</file>
@@ -18,8 +15,6 @@
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/user/Customer.java</file>
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/user/Manager.java</file>
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/gui/Login.java</file>
-            <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/gui/AppointmentBooking.java</file>
-            <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/interfaces/PlainJTextField.java</file>
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/customer.txt</file>
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/gui/MgrMenu.java</file>
             <file>file:/C:/Users/ander/Documents/GitHub/OODJ/src/gui/UserList.java</file>

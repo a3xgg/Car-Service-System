@@ -33,6 +33,10 @@ public class Appointment {
         return appointmentEndTime;
     }
 
+    public void setAppointmentStatus(String appointmentStatus) {
+        this.appointmentStatus = appointmentStatus;
+    }
+
     public int getAppointmentID() {
         return appointmentID;
     }
