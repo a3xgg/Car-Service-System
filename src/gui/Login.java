@@ -114,6 +114,8 @@ public class Login extends JFrame implements ActionListener{
                     p.println(Oodj.appointmentDetails.get(i).getCustomer().getName());
                     p.println(Oodj.appointmentDetails.get(i).getStaff().getName());
                     p.println(Oodj.appointmentDetails.get(i).getAppointmentStatus());
+                    p.println(Oodj.appointmentDetails.get(i).getCharge());
+                    p.println(Oodj.appointmentDetails.get(i).getTotalPaid());
                     p.println();
                 }
                 p.close();

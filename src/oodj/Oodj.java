@@ -62,41 +62,6 @@ public class Oodj {
                 staff.add(staffAccountDetails);
             }
         } catch(Exception e){}
-        
-//        try{
-//            Scanner s = new Scanner(new File("manager.txt"));
-//            while(s.hasNext()){
-//                String username = s.nextLine();
-//                String password = s.nextLine();
-//                String name = s.nextLine();
-//                String ic = s.nextLine();
-//                String email = s.nextLine();
-//                String phone = s.nextLine();
-//                String address = s.nextLine();
-//                String department = s.nextLine();
-//                s.nextLine();
-//                Staff staffAccountDetails = new Staff(username, password, name,ic,email,phone,address,department);
-//                staff.add(staffAccountDetails);
-//            }
-//        } catch(Exception e){}
-//        try{
-//            Scanner s = new Scanner(new File("technician.txt"));
-//            while(s.hasNext()){
-//                String username = s.nextLine();
-//                String password = s.nextLine();
-//                String name = s.nextLine();
-//                String ic = s.nextLine();
-//                String email = s.nextLine();
-//                String phone = s.nextLine();
-//                String address = s.nextLine();
-//                String department = s.nextLine();
-//                s.nextLine();
-//                Staff staffAccountDetails = new Staff(username, password, name,ic,email,phone,address,department);
-//                staff.add(staffAccountDetails);
-//            }
-//        } catch(Exception e){}
-        
-        
         try{
             Scanner sx = new Scanner(new File("customer.txt"));
             while(sx.hasNext()){
@@ -122,6 +87,8 @@ public class Oodj {
                 String customerName = sx.nextLine();
                 String technicianName = sx.nextLine();
                 String appointmentStatus = sx.nextLine();
+                int charge = sx.nextInt();
+                int totalPaid = sx.nextInt();
                 sx.nextLine();
                 Customer x = null;
                 Technician y = null;
@@ -137,13 +104,13 @@ public class Oodj {
                         break;
                     }
                 }
-                Appointment appointment = new Appointment(id,date,time,endTime,serviceType,x,y,appointmentStatus);
+                Appointment appointment = new Appointment(id,date,time,endTime,serviceType,x,y,appointmentStatus,charge,totalPaid);
                 y.getAppointment().add(appointment);
                 appointmentDetails.add(appointment);
             }
         } catch(Exception e){}
-        for(int i = 0; i < technician.size(); i++){
-            System.out.println(technician.get(i).getAppointment());
-        }
+//        for(int i = 0; i < technician.size(); i++){
+//            System.out.println(technician.get(i).getAppointment());
+//        }
     }
 }
