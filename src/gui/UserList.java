@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -27,6 +28,8 @@ public class UserList extends JFrame implements ActionListener {
     private final DefaultTableModel staffModel = new DefaultTableModel(columnHeader[0],0);
     private final DefaultTableModel customerModel = new DefaultTableModel(columnHeader[1],0);
     
+    private JButton editCustomer, deleteCustomer, searchCustomer,editStaff, deleteStaff, searchStaff;
+    
     private JScrollPane staffScrollable, customerScrollable;
     
     public UserList(){  
@@ -37,22 +40,46 @@ public class UserList extends JFrame implements ActionListener {
         setLocation(300,250);
         
         staffLbl = new JLabel("Staff");
+        staffLbl.setBounds(10, 10, 100, 25);
         staffTable = new JTable(staffModel);
         
+        editStaff = new JButton("Edit Staff");
+        editStaff.setBounds(50, 10, 100, 25);
+        deleteStaff = new JButton("Delete Staff");
+        deleteStaff.setBounds(160, 10, 100, 25);
+        searchStaff = new JButton("Search Staff");
+        searchStaff.setBounds(280, 10, 120, 25);
+        
         staffScrollable = new JScrollPane(staffTable);
+        staffScrollable.setBounds(20, 50, 500, 500);
         
         customerLbl = new JLabel("Customer");
+        customerLbl.setBounds(700, 10, 100, 25);
         customerTable = new JTable(customerModel);
         
+        editCustomer = new JButton("Edit Customer");
+        editCustomer.setBounds(800, 10, 100, 25);
+        deleteCustomer = new JButton("Delete Customer");
+        deleteCustomer.setBounds(920, 10, 100, 25);
+        searchCustomer = new JButton("Search Customer");
+        searchCustomer.setBounds(1050, 10, 140, 25);
+        
         customerScrollable = new JScrollPane(customerTable);
+        customerScrollable.setBounds(710, 50, 500, 500);
         
         add(staffLbl);
+        add(editStaff);
+        add(deleteStaff);
+        add(searchStaff);
         add(staffScrollable);
         
         add(customerLbl);
         add(customerScrollable);
+        add(editCustomer);
+        add(deleteCustomer);
+        add(searchCustomer);
         
-        setLayout(new FlowLayout());
+        setLayout(null);
     }
 
     @Override

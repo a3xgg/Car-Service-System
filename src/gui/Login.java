@@ -58,7 +58,7 @@ public class Login extends JFrame implements ActionListener{
         if wrong username and password is entered, program will show 'Wrong Credentials'
         */
         if(ae.getSource() == loginBtn || ae.getSource() == username || ae.getSource() == password){
-            //Oodj.mgrMenuGUI.setVisible(true); //for debugging purpose
+//            Oodj.mgrMenuGUI.setVisible(true); //for debugging purpose
             String uname = username.getText();
             String pwd = new String(password.getPassword());
             
@@ -77,6 +77,7 @@ public class Login extends JFrame implements ActionListener{
             try{
                 PrintWriter p = new PrintWriter("staff.txt");
                 for(int i = 0; i < Oodj.staff.size(); i++){
+                    p.println(Oodj.staff.get(i).getStaffID());
                     p.println(Oodj.staff.get(i).getUsername());
                     p.println(Oodj.staff.get(i).getPassword());
                     p.println(Oodj.staff.get(i).getName());

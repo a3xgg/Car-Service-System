@@ -20,6 +20,8 @@ public class Appointment {
         this.staff = staff;
         this.serviceType = serviceType;
         this.appointmentStatus = appointmentStatus;
+        this.charge = charge;
+        this.totalPaid = totalPaid;
     }
     public Appointment(int appointmentID, LocalDate appointmentDate, LocalTime appointmentStartTime, LocalTime appointmentEndTime, String serviceType, Customer customer, Staff staff) {
         this(appointmentID,appointmentDate,appointmentStartTime,appointmentEndTime, serviceType, customer,staff,"Not Completed",0,0);

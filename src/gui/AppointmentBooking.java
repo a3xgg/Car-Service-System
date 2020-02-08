@@ -176,9 +176,9 @@ public class AppointmentBooking extends JFrame implements ActionListener{
         }
         LocalDate selectedDate = datePicker.getDate();
         LocalTime selectedTime = timePicker.getTime();
-        String service = serviceType.getSelectedItem().toString();
+        String services = serviceType.getSelectedItem().toString();
         
-        bookingInfo = new Appointment(id,selectedDate,selectedTime,endTime,service,customer,staff);
+        bookingInfo = new Appointment(id,selectedDate,selectedTime,endTime,services,customer,staff);
         
         Oodj.appointmentDetails.add(bookingInfo);
         JOptionPane.showMessageDialog(this, "Booking Successful!");

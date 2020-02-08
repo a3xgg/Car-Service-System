@@ -21,8 +21,6 @@ public class ViewAppointment extends JFrame implements ActionListener{
     private LocalTime appointmentStartTime, appointmentEndTime;
     private String customer;
     private String serviceType, appointmentStatus;
-    private int charge;
-    
     private final String[][] columnHeader = { {"AppointmentID","Appointment Date","Appointment Start Time","Appointment End Time", "Customer", "Service Type", "Appointment Status"} };
     
     private JTable appointmentTable;

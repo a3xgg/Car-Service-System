@@ -12,13 +12,14 @@ import oodj.*;
 import user.Customer;
 import interfaces.*;
 
-public class RegisterCustomer extends JFrame implements ActionListener, Registration, PlainJTextField{
+public class RegisterCustomer extends JFrame implements ActionListener, Registration, PlainJTextField, Generator{
     
     private final JButton registerBtn, backBtn;
     private final JLabel name, ic, email, phoneNumber, mailingAddress;
     private final JTextField nameTf, icTf, emailTf, phoneNumberTf, mailingAddressTf;
     private Customer customerDetails;
     private AppointmentBooking bookingGUI;
+    private int id;
     
     public RegisterCustomer(){
         setSize(210,570);
@@ -74,14 +75,7 @@ public class RegisterCustomer extends JFrame implements ActionListener, Registra
     }
     @Override
     public void registerUser(){
-        int id;
-        if(Oodj.customer.isEmpty()){
-            id = 101;
-        } else{
-            int size = Oodj.customer.size();
-            Customer last = Oodj.customer.get(size - 1);
-            id = last.getCustID() + 1;
-        }
+        idGenerator();
         String name = nameTf.getText();
         String ic = icTf.getText();
         String email = emailTf.getText();
@@ -99,4 +93,17 @@ public class RegisterCustomer extends JFrame implements ActionListener, Registra
             bookingGUI.setVisible(true);
         } 
     }
+    @Override
+    public void idGenerator(){
+        if(Oodj.customer.isEmpty()){
+            id = 101;
+        } else{
+            int size = Oodj.customer.size();
+            Customer last = Oodj.customer.get(size - 1);
+            id = last.getCustID() + 1;
+        }
+    }
+
+    @Override
+    public void receiptGenerator() {}
 }

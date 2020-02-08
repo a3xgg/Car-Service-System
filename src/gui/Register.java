@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import oodj.*;
 import user.*;
 
-public class Register extends JFrame implements ActionListener, Registration, UserAccountVerification, PlainJTextField{
+public class Register extends JFrame implements ActionListener, Registration, UserAccountVerification, PlainJTextField, Generator{
     
     private Staff staffAccountDetails;
     private final JButton registerBtn, backBtn;
@@ -27,6 +27,7 @@ public class Register extends JFrame implements ActionListener, Registration, Us
     private final ButtonGroup bg;
     private String password,retypepw, username;
     private boolean flag = false;
+    private int id;
     
     public Register(){
         setSize(210,570);
@@ -142,6 +143,7 @@ public class Register extends JFrame implements ActionListener, Registration, Us
     }
     @Override
     public void registerUser(){
+        idGenerator();
         String name = nameTf.getText();
         String ic = icTf.getText();
         String email = emailTf.getText();
@@ -154,10 +156,10 @@ public class Register extends JFrame implements ActionListener, Registration, Us
         } else{
             if(mgr.isSelected()){
                 role = mgr.getText();
-                staffAccountDetails = new Manager(username, password,name,ic,email,phoneNumber,address,role);
+                staffAccountDetails = new Manager(id,username, password,name,ic,email,phoneNumber,address,role);
             } else if(tech.isSelected()){
                 role = tech.getText();
-                staffAccountDetails = new Technician(username, password,name,ic,email,phoneNumber,address,role);
+                staffAccountDetails = new Technician(id,username, password,name,ic,email,phoneNumber,address,role);
             }
             
             Oodj.staff.add(staffAccountDetails);
@@ -179,5 +181,20 @@ public class Register extends JFrame implements ActionListener, Registration, Us
             return false;
         }
         return pat.matcher(email).matches();
+    }
+
+    @Override
+    public void idGenerator() {
+        if(Oodj.staff.isEmpty()){
+            id = 10001;
+        } else{
+            int size = Oodj.staff.size();
+            Staff last = Oodj.staff.get(size - 1);
+            id = last.getStaffID() + 1;
+        }
+    }
+
+    @Override
+    public void receiptGenerator() {
     }
 }
