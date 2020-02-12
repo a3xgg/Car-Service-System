@@ -1,7 +1,5 @@
 package user;
-
 import java.util.ArrayList;
-
 public class Technician extends Staff{
     private ArrayList<Appointment> appointment;
     public Technician(int id, String username, String password , String name, String icNumber, String email, String phoneNumber, String mailingAddress, String department){
