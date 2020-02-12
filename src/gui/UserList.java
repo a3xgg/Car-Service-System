@@ -1,12 +1,13 @@
 package gui;
 
-import java.awt.FlowLayout;
+import interfaces.ManageUser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -14,13 +15,13 @@ import oodj.Oodj;
 import user.Customer;
 import user.Staff;
 
-public class UserList extends JFrame implements ActionListener {
+public class UserList extends JFrame implements ActionListener, ManageUser {
     private final String[][] columnHeader = {
-        {"Name","IC","E-mail","Phone Number","Address","Department"},
+        {"Staff ID","Name","IC","E-mail","Phone Number","Address","Department"},
         {"Cust ID","Name","IC","E-mail","Phone Number","Address"}};
     
     private String name, ic, email, phone, address, department;
-    private int custID;
+    private int custID,staffID;
     
     private JTable staffTable, customerTable;
     private JLabel staffLbl, customerLbl;
@@ -31,6 +32,7 @@ public class UserList extends JFrame implements ActionListener {
     private JButton editCustomer, deleteCustomer, searchCustomer,editStaff, deleteStaff, searchStaff;
     
     private JScrollPane staffScrollable, customerScrollable;
+    private int x;
     
     public UserList(){  
         getStaffData(Oodj.staff);
@@ -45,10 +47,13 @@ public class UserList extends JFrame implements ActionListener {
         
         editStaff = new JButton("Edit Staff");
         editStaff.setBounds(50, 10, 100, 25);
+        editStaff.addActionListener(this);
         deleteStaff = new JButton("Delete Staff");
+        deleteStaff.addActionListener(this);
         deleteStaff.setBounds(160, 10, 100, 25);
         searchStaff = new JButton("Search Staff");
         searchStaff.setBounds(280, 10, 120, 25);
+        searchStaff.addActionListener(this);
         
         staffScrollable = new JScrollPane(staffTable);
         staffScrollable.setBounds(20, 50, 500, 500);
@@ -59,10 +64,13 @@ public class UserList extends JFrame implements ActionListener {
         
         editCustomer = new JButton("Edit Customer");
         editCustomer.setBounds(800, 10, 100, 25);
+        editCustomer.addActionListener(this);
         deleteCustomer = new JButton("Delete Customer");
+        deleteCustomer.addActionListener(this);
         deleteCustomer.setBounds(920, 10, 100, 25);
         searchCustomer = new JButton("Search Customer");
         searchCustomer.setBounds(1050, 10, 140, 25);
+        searchCustomer.addActionListener(this);
         
         customerScrollable = new JScrollPane(customerTable);
         customerScrollable.setBounds(710, 50, 500, 500);
@@ -84,18 +92,31 @@ public class UserList extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        
+        if(ae.getSource() == deleteStaff || ae.getSource() == deleteCustomer){
+            try{
+                x = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter ID to delete"));
+                deleteUser();
+            } catch(Exception e){
+                System.out.println("Operation Cancelled");
+            }
+            
+        } else if(ae.getSource() == editStaff || ae.getSource() == editCustomer){
+            
+        } else if(ae.getSource() == searchStaff || ae.getSource() == searchCustomer){
+            
+        }
     }
     
     public final void getStaffData(ArrayList<Staff> staff){
         for(int i = 0; i < staff.size(); i++){
+            staffID = staff.get(i).getStaffID();
             name = staff.get(i).getName();
             ic = staff.get(i).getIcNumber();
             email = staff.get(i).getEmail();
             phone = staff.get(i).getPhoneNumber();
             address = staff.get(i).getMailingAddress();
             department = staff.get(i).getDepartment();
-            Object[] detail = {name,ic,email,phone,address,department};
+            Object[] detail = {staffID,name,ic,email,phone,address,department};
             staffModel.addRow(detail);
         }
     }
@@ -111,5 +132,49 @@ public class UserList extends JFrame implements ActionListener {
             Object[] detail = {custID,name,ic,email,phone,address};
             customerModel.addRow(detail);
         }
+    }
+
+    @Override
+    public void editUser() {
+        
+    }
+
+    @Override
+    public void deleteUser() {
+        boolean flag = false;
+        Customer c = null;
+        Staff s = null;
+        for(int i = 0; i < Oodj.staff.size(); i++){
+            if(x == Oodj.staff.get(i).getStaffID()){
+                s = Oodj.staff.get(i);
+                Oodj.staff.remove(s);
+                staffModel.removeRow(i);
+                flag = true;
+                break;
+            }
+        }
+        if(flag){
+            JOptionPane.showMessageDialog(this, "Staff has been deleted");
+        } else{
+            for(int i = 0; i < Oodj.customer.size(); i++){
+                if(x == Oodj.customer.get(i).getCustID()){
+                    c = Oodj.customer.get(i);
+                    Oodj.customer.remove(c);
+                    customerModel.removeRow(i);
+                    flag = true;
+                    break;
+                }
+            }
+            if(flag){
+                JOptionPane.showMessageDialog(this, "Customer has been deleted");
+            } else{
+                JOptionPane.showMessageDialog(this, "No user found");
+            }
+        }
+        
+    }
+
+    @Override
+    public void searchUser() {
     }
 }

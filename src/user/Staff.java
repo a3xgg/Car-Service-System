@@ -1,5 +1,7 @@
 package user;
 
+import java.util.ArrayList;
+
 public class Staff extends Person{
     
     private String department;
@@ -18,4 +20,5 @@ public class Staff extends Person{
     public int getStaffID() {
         return staffID;
     }
+
 }

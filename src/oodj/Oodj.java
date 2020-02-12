@@ -6,16 +6,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Properties;
 import java.util.Scanner;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import user.*;
 
 public class Oodj {
@@ -34,7 +25,9 @@ public class Oodj {
     public static ArrayList<Staff> staff;
     public static ArrayList<Customer> customer;
     public static ArrayList<Appointment> appointmentDetails;
+
     public static Staff loginAccount;
+    public static Customer custLogin;
     public static Appointment aptPayment;
     
     public static void main(String[] args) {
@@ -50,6 +43,13 @@ public class Oodj {
         paymentGUI = new Payment();
 
         //takes all values from the text file and stores it in the array list
+        
+        readCustomer();
+        readStaff();
+        readAppointment();
+    }
+    
+    public static void readStaff(){
         try{
             Scanner s = new Scanner(new File("staff.txt"));
             while(s.hasNext()){
@@ -75,6 +75,9 @@ public class Oodj {
                 staff.add(staffAccountDetails);
             }
         } catch(Exception e){}
+    }
+    
+    public static void readCustomer(){
         try{
             Scanner sx = new Scanner(new File("customer.txt"));
             while(sx.hasNext()){
@@ -89,6 +92,9 @@ public class Oodj {
                 customer.add(customerDetails);
             }
         } catch(Exception e){}
+    }
+    
+    public static void readAppointment(){
         try{
             Scanner sx = new Scanner(new File("appointment.txt"));
             while(sx.hasNext()){
@@ -122,12 +128,5 @@ public class Oodj {
                 appointmentDetails.add(appointment);
             }
         } catch(Exception e){}
-//        for(int i = 0; i < technician.size(); i++){
-//            System.out.println(technician.get(i).getAppointment());
-//        }
-//        for(int i = 0; i < appointmentDetails.size(); i++){
-//            System.out.println(appointmentDetails.get(i));
-//        }
     }
-    
 }

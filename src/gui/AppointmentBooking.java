@@ -23,6 +23,7 @@ import oodj.Oodj;
 import user.Appointment;
 import user.Customer;
 import user.Staff;
+import user.Technician;
 
 public class AppointmentBooking extends JFrame implements ActionListener{
     
@@ -85,13 +86,44 @@ public class AppointmentBooking extends JFrame implements ActionListener{
         dateSettings.setFormatForDatesCommonEra("yyyy-MM-dd");
         dateSettings.setFormatForDatesBeforeCommonEra("uuuu-MM-dd");
         datePicker = new DatePicker(dateSettings);
-        datePicker.setDateToToday();
+        datePicker.addDateChangeListener(e ->{
+            availableTechnicians();
+            try{
+                String s = null;
+                for(int i = 0; i < Oodj.technician.size(); i++){
+                    for(int x = 0; x < Oodj.technician.get(i).getAppointment().size(); x++){  
+                        if(datePicker.getDate().compareTo(Oodj.technician.get(i).getAppointment().get(x).getAppointmentDate()) == 0){
+                            if(timePicker.getTime().compareTo(Oodj.technician.get(i).getAppointment().get(x).getAppointmentStartTime()) >= 0 && timePicker.getTime().compareTo(Oodj.technician.get(i).getAppointment().get(x).getAppointmentEndTime()) <= 0){
+                                s = Oodj.technician.get(i).getName();
+                                allAvailableTechnician.removeItem(s);
+                            }
+                        }
+                    }
+                }
+            } catch (Exception ex){}
+        });
         
         time = new JLabel("Select Time:");
         timeSettings = new TimePickerSettings();
         timeSettings.setFormatForDisplayTime(PickerUtilities.createFormatterFromPatternString("HH:mm:ss", timeSettings.getLocale()));
         timeSettings.setInitialTimeToNow();
         timePicker = new TimePicker(timeSettings);
+        timePicker.addTimeChangeListener(e ->{
+            availableTechnicians();
+            try{
+                String s = null;
+                for(int i = 0; i < Oodj.technician.size(); i++){
+                    for(int x = 0; x < Oodj.technician.get(i).getAppointment().size(); x++){
+                        if(timePicker.getTime().compareTo(Oodj.technician.get(i).getAppointment().get(x).getAppointmentStartTime()) >= 0 && timePicker.getTime().compareTo(Oodj.technician.get(i).getAppointment().get(x).getAppointmentEndTime()) <= 0){
+                            if(datePicker.getDate().compareTo(Oodj.technician.get(i).getAppointment().get(x).getAppointmentDate())==0){
+                                s = Oodj.technician.get(i).getName();
+                                allAvailableTechnician.removeItem(s);
+                            }
+                        }
+                    }
+                }
+            } catch (Exception ex){}
+        });
         
         endService = new JLabel("End service time: ");
         endLbl = new JLabel(formatTime.format(cal.getTime()));
@@ -143,10 +175,15 @@ public class AppointmentBooking extends JFrame implements ActionListener{
         for(int i = 0; i < Oodj.customer.size(); i++){
             allCustomer.addItem(Oodj.customer.get(i).getName());
         }
-        for(int i = 0; i < Oodj.staff.size(); i++){
-            if(Oodj.staff.get(i).getDepartment().equals("Technician")){
-                allAvailableTechnician.addItem(Oodj.staff.get(i).getName());
-            }
+        for(int i = 0; i < Oodj.technician.size(); i++){
+            allAvailableTechnician.addItem(Oodj.technician.get(i).getName());
+        }
+    }
+    
+    public void availableTechnicians(){
+        allAvailableTechnician.removeAllItems();
+       for(int i = 0; i < Oodj.technician.size(); i++){
+            allAvailableTechnician.addItem(Oodj.technician.get(i).getName());
         }
     }
     
@@ -177,12 +214,21 @@ public class AppointmentBooking extends JFrame implements ActionListener{
         LocalDate selectedDate = datePicker.getDate();
         LocalTime selectedTime = timePicker.getTime();
         String services = serviceType.getSelectedItem().toString();
-        
-        bookingInfo = new Appointment(id,selectedDate,selectedTime,endTime,services,customer,staff);
-        
-        Oodj.appointmentDetails.add(bookingInfo);
-        JOptionPane.showMessageDialog(this, "Booking Successful!");
-        this.setVisible(false);
-        Oodj.mgrMenuGUI.setVisible(true);
+        if(serviceType.getSelectedItem().toString().equals("")){
+            JOptionPane.showMessageDialog(this, "Please select a service type");
+        } else{
+            bookingInfo = new Appointment(id,selectedDate,selectedTime,endTime,services,customer,staff);
+            Oodj.appointmentDetails.add(bookingInfo);
+            for(int i = 0; i < Oodj.technician.size(); i++){
+                if(staff.getName().equals(Oodj.technician.get(i).getName())){
+                    Technician t = Oodj.technician.get(i);
+                    t.addAppointment(bookingInfo);
+                    break;
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Booking Successful!");
+            this.setVisible(false);
+            Oodj.mgrMenuGUI.setVisible(true);
+        }
     }
 }

@@ -62,12 +62,17 @@ public class Payment extends JFrame implements ActionListener, Generator{
             JOptionPane.showMessageDialog(this, "You paid RM" + remainder + " less.");
             label.setText(Oodj.aptPayment.getCustomer().getName() + ", your charge is RM" + remainder);
         } else{
+            FeedbackForm ff = new FeedbackForm();
             JOptionPane.showMessageDialog(this, "Thank you for the payment, for any extra change please refer to our technician");
             JOptionPane.showMessageDialog(this, "Extra change RM" + remainder*-1);
             Oodj.aptPayment.setTotalPaid(paymentMade);
             Oodj.aptPayment.setAppointmentStatus("Completed");
             receiptGenerator();
-            sendMail(Oodj.aptPayment.getCustomer().getEmail());
+            ff.setVisible(true);
+            ff.getAppointmentLbl().setText("Appointment ID: " + Oodj.aptPayment.getAppointmentID());
+            ff.getCustomerLbl().setText("Customer Name: " + Oodj.aptPayment.getCustomer().getName());
+            ff.getTechnicianLbl().setText("Technician Name: " + Oodj.aptPayment.getStaff().getName());
+
             this.setVisible(false);
             Oodj.techMenuGUI.setVisible(true);
         }
@@ -156,14 +161,15 @@ public class Payment extends JFrame implements ActionListener, Generator{
             Multipart emailContent = new MimeMultipart();
             
             MimeBodyPart textBodyPart = new MimeBodyPart();
-            textBodyPart.setText("Dear ,"  + "\nThank you for choosing APU automotive service.\nHere is your receipt of payment.");
+            textBodyPart.setText("Dear "  + Oodj.aptPayment.getCustomer().getName() + ",\nThank you for choosing APU automotive service.\nHere is your receipt of payment.");
             
             MimeBodyPart pdfFile = new MimeBodyPart();
+            MimeBodyPart pdfFile2 = new MimeBodyPart();
             pdfFile.attachFile("C:\\Users\\ander\\Documents\\GitHub\\OODJ\\receipt.pdf");
-            
+            pdfFile2.attachFile("C:\\Users\\ander\\Documents\\GitHub\\OODJ\\feedback.pdf");
             emailContent.addBodyPart(textBodyPart);
             emailContent.addBodyPart(pdfFile);
-            
+            emailContent.addBodyPart(pdfFile2);
             msg.setContent(emailContent);
 //            
             System.out.println("Message Sent");

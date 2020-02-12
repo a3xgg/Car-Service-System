@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintWriter;
+import java.util.Collections;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +15,7 @@ import javax.swing.JPasswordField;
 
 public class Login extends JFrame implements ActionListener{
     
-    private final JButton loginBtn, quitBtn;
+    private final JButton loginBtn, quitBtn, custLogin;
     private final JTextField username;
     private final JPasswordField password;
     private final JLabel usrlbl, passlbl, message;
@@ -22,7 +23,7 @@ public class Login extends JFrame implements ActionListener{
 
     public Login(){
 
-        setSize(266,150);
+        setSize(266,170);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(100,200);
         
@@ -41,10 +42,13 @@ public class Login extends JFrame implements ActionListener{
         
         quitBtn = new JButton("Quit");
         quitBtn.addActionListener(this);
+        
+        custLogin = new JButton("Customer Login");
+        custLogin.addActionListener(this);
 
         add(message);
         add(usrlbl);add(username);add(passlbl);add(password);
-        add(loginBtn);add(quitBtn);
+        add(loginBtn);add(custLogin);add(quitBtn);
         
         setVisible(true);
         setLayout(new FlowLayout());
@@ -57,7 +61,7 @@ public class Login extends JFrame implements ActionListener{
         if no username and password is entered, program will show 'Wrong Credentials'
         if wrong username and password is entered, program will show 'Wrong Credentials'
         */
-        if(ae.getSource() == loginBtn || ae.getSource() == username || ae.getSource() == password){
+        if(ae.getSource() == loginBtn){
 //            Oodj.mgrMenuGUI.setVisible(true); //for debugging purpose
             String uname = username.getText();
             String pwd = new String(password.getPassword());
@@ -74,55 +78,69 @@ public class Login extends JFrame implements ActionListener{
             Staff Details will be stored in the staff.txt file
             Staff Account Details will be stored in the staffAccount.txt file
             */
-            try{
-                PrintWriter p = new PrintWriter("staff.txt");
-                for(int i = 0; i < Oodj.staff.size(); i++){
-                    p.println(Oodj.staff.get(i).getStaffID());
-                    p.println(Oodj.staff.get(i).getUsername());
-                    p.println(Oodj.staff.get(i).getPassword());
-                    p.println(Oodj.staff.get(i).getName());
-                    p.println(Oodj.staff.get(i).getIcNumber());
-                    p.println(Oodj.staff.get(i).getEmail());
-                    p.println(Oodj.staff.get(i).getPhoneNumber());
-                    p.println(Oodj.staff.get(i).getMailingAddress());
-                    p.println(Oodj.staff.get(i).getDepartment());
-                    p.println();
-                    
-                }
-                p.close();
-            } catch(Exception e){}
-            try{
-                PrintWriter p = new PrintWriter("customer.txt");
-                for(int i = 0; i < Oodj.customer.size(); i++){
-                    p.println(Oodj.customer.get(i).getCustID());
-                    p.println(Oodj.customer.get(i).getName());
-                    p.println(Oodj.customer.get(i).getIcNumber());
-                    p.println(Oodj.customer.get(i).getEmail());
-                    p.println(Oodj.customer.get(i).getPhoneNumber());
-                    p.println(Oodj.customer.get(i).getMailingAddress());
-                    p.println();
-                }
-                p.close();
-            } catch (Exception e){}
-            try{
-                PrintWriter p = new PrintWriter("appointment.txt");
-                for(int i = 0; i < Oodj.appointmentDetails.size(); i++){
-                    p.println(Oodj.appointmentDetails.get(i).getAppointmentID());
-                    p.println(Oodj.appointmentDetails.get(i).getAppointmentDate());
-                    p.println(Oodj.appointmentDetails.get(i).getAppointmentStartTime());
-                    p.println(Oodj.appointmentDetails.get(i).getAppointmentEndTime());
-                    p.println(Oodj.appointmentDetails.get(i).getServiceType());
-                    p.println(Oodj.appointmentDetails.get(i).getCustomer().getName());
-                    p.println(Oodj.appointmentDetails.get(i).getStaff().getName());
-                    p.println(Oodj.appointmentDetails.get(i).getAppointmentStatus());
-                    p.println(Oodj.appointmentDetails.get(i).getCharge());
-                    p.println(Oodj.appointmentDetails.get(i).getTotalPaid());
-                    p.println();
-                }
-                p.close();
-            } catch (Exception e){}
+            writeToStaff();
+            writeToAppointment();
+            writeToCustomer();
             System.exit(0);
+        } else if(ae.getSource() == custLogin){
+            String uname = username.getText();
+            String pw = new String(password.getPassword());
+            customerLogin(uname,pw);
         }
+    }
+    
+    public void writeToStaff(){
+        try{
+            PrintWriter p = new PrintWriter("staff.txt");
+            for(int i = 0; i < Oodj.staff.size(); i++){
+                p.println(Oodj.staff.get(i).getStaffID());
+                p.println(Oodj.staff.get(i).getUsername());
+                p.println(Oodj.staff.get(i).getPassword());
+                p.println(Oodj.staff.get(i).getName());
+                p.println(Oodj.staff.get(i).getIcNumber());
+                p.println(Oodj.staff.get(i).getEmail());
+                p.println(Oodj.staff.get(i).getPhoneNumber());
+                p.println(Oodj.staff.get(i).getMailingAddress());
+                p.println(Oodj.staff.get(i).getDepartment());
+                p.println();
+
+            }
+            p.close();
+        } catch(Exception e){}
+    }
+    public void writeToAppointment(){
+        try{
+            PrintWriter p = new PrintWriter("appointment.txt");
+            for(int i = 0; i < Oodj.appointmentDetails.size(); i++){
+                p.println(Oodj.appointmentDetails.get(i).getAppointmentID());
+                p.println(Oodj.appointmentDetails.get(i).getAppointmentDate());
+                p.println(Oodj.appointmentDetails.get(i).getAppointmentStartTime());
+                p.println(Oodj.appointmentDetails.get(i).getAppointmentEndTime());
+                p.println(Oodj.appointmentDetails.get(i).getServiceType());
+                p.println(Oodj.appointmentDetails.get(i).getCustomer().getName());
+                p.println(Oodj.appointmentDetails.get(i).getStaff().getName());
+                p.println(Oodj.appointmentDetails.get(i).getAppointmentStatus());
+                p.println(Oodj.appointmentDetails.get(i).getCharge());
+                p.println(Oodj.appointmentDetails.get(i).getTotalPaid());
+                p.println();
+            }
+            p.close();
+        } catch (Exception e){}
+    }
+    public void writeToCustomer(){
+        try{
+            PrintWriter p = new PrintWriter("customer.txt");
+            for(int i = 0; i < Oodj.customer.size(); i++){
+                p.println(Oodj.customer.get(i).getCustID());
+                p.println(Oodj.customer.get(i).getName());
+                p.println(Oodj.customer.get(i).getIcNumber());
+                p.println(Oodj.customer.get(i).getEmail());
+                p.println(Oodj.customer.get(i).getPhoneNumber());
+                p.println(Oodj.customer.get(i).getMailingAddress());
+                p.println();
+            }
+            p.close();
+        } catch (Exception e){}
     }
 
     public void verifyAccount(String uname, String pwd){
@@ -159,6 +177,30 @@ public class Login extends JFrame implements ActionListener{
             this.setVisible(false);
             Oodj.techMenuGUI.add(loggedInUser);
             Oodj.techMenuGUI.setVisible(true);
+        }
+    }
+    
+    public void customerLogin(String uname, String pw){
+        boolean flag = false;
+        for(int i = 0; i < Oodj.customer.size(); i++){
+            if(uname.equals(Oodj.customer.get(i).getEmail())){
+                Oodj.custLogin = Oodj.customer.get(i);
+                flag = true;
+                break;
+            }
+        }
+        if(flag){
+            if(pw.equals(Oodj.custLogin.getIcNumber())){
+                CustomerMenu cm = new CustomerMenu();
+                username.setText(null);
+                password.setText(null);
+                this.setVisible(false);
+                cm.setVisible(true);
+            } else{
+                JOptionPane.showMessageDialog(this, "Incorrect Password");
+            }
+        } else{
+            JOptionPane.showMessageDialog(this,"Wrong Credentials");
         }
     }
 }

@@ -1,220 +1,110 @@
 90001
-2020-02-08
-22:16:19
-23:16:19
+2020-02-13
+02:30
+03:30
 Normal Service
 Anderson Febrian
 Technician Two
 Completed
-25
-25
+120
+120
 
 90002
-2020-02-08
-22:17:40
-23:17:40
+2020-02-07
+01:00
+02:00
 Normal Service
-Anderson Febrian
-Technician One
+Open VPN
+Technician Three
 Completed
 100
 100
 
 90003
-2020-02-08
-22:17:49
-23:17:49
+2020-02-07
+01:00
+02:00
 Normal Service
-Anderson Febrian
-Technician Two
+John Blake
+Technician One
 Completed
 100
 100
 
 90004
-2020-02-09
+2020-02-14
+02:00
 03:00
-06:00
-Major Service
-Anderson Febrian
-Technician One
+Normal Service
+Open VPN
+Technician Four
 Completed
-25
-25
+123
+123
 
 90005
-2020-02-20
-03:30
-06:30
+2020-02-07
+02:00
+05:00
 Major Service
-Low Tuck Weng
-Technician One
+Anderson Febrian
+Technician Five
 Completed
-35
-35
+100
+100
 
 90006
-2020-02-27
-03:30
-04:30
+2020-02-07
+02:00
+03:00
 Normal Service
 Anderson Febrian
-Technician Three
+Technician Two
 Completed
-23
-23
+13
+13
 
 90007
-2020-02-28
-03:00
-04:00
+2020-02-07
+01:00
+02:00
 Normal Service
 John Blake
 Technician Four
 Completed
-25
-25
+100
+100
 
 90008
-2020-02-20
+2020-02-07
 03:30
-06:30
-Major Service
-Open VPN
-Technician Five
+04:30
+Normal Service
+Anderson Febrian
+Technician One
 Completed
 100
 100
 
 90009
-2020-02-28
-03:30
-04:30
-Normal Service
-Margarretta
-Technician Two
-Completed
-19
-19
-
-90010
-2020-02-14
+2020-02-29
+03:00
 04:00
-05:00
 Normal Service
-Margarretta
-Technician Two
-Completed
-90
-90
-
-90011
-2020-02-28
-03:30
-06:30
-Major Service
 Anderson Febrian
 Technician One
 Completed
-24
-24
+9
+9
 
-90012
-2020-02-29
-10:00
-11:00
-Normal Service
-John Blake
-Technician One
-Completed
-100
-100
-
-90013
-2020-02-21
-01:17:50
-04:17:50
-Major Service
-Margarretta
-Technician One
-Completed
-25
-25
-
-90014
+90010
 2020-02-20
 02:30
 05:30
 Major Service
-Open VPN
-Technician Five
+botak
+Technician Three
 Completed
-200
-200
-
-90015
-2020-02-29
-03:00
-06:00
-Major Service
-TP053792
-Technician One
-Completed
-100
-100
-
-90016
-2020-02-09
-01:25:06
-04:25:06
-Major Service
-TP053792
-Technician One
-Completed
-123
-123
-
-90017
-2020-02-09
-01:00
-02:00
-Normal Service
-Anderson Febrian
-Technician One
-Completed
-100
-100
-
-90018
-2020-02-29
-01:00
-02:00
-Normal Service
-Anderson Febrian
-Technician Five
-Completed
-100
-40
-
-90019
-2020-02-28
-04:00
-07:00
-Major Service
-TP053792
-Technician One
-Completed
-100
-100
-
-90020
-2020-02-21
-04:00
-05:00
-Normal Service
-Margarretta
-Technician Two
-Completed
-100
-100
+2500
+2500
 

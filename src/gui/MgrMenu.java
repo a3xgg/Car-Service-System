@@ -13,7 +13,7 @@ public class MgrMenu extends JFrame implements ActionListener{
     private UserList userGUI;
     private RegisterCustomer regCustGUI;
 
-    private JButton registerBtn, logoutBtn, bookingBtn, registeredUser, editProfile;
+    private JButton registerBtn, logoutBtn, bookingBtn, registeredUser, editProfile, viewAppointment;
     private Object[] option = {"New Customer","Returning Customer"};
     
     public AppointmentBooking bookingGUI;
@@ -21,6 +21,9 @@ public class MgrMenu extends JFrame implements ActionListener{
     public MgrMenu(){
         setSize(500,200);
         setLocation(200,100);
+        
+        viewAppointment = new JButton("View All Appointments");
+        viewAppointment.addActionListener(this);
         
         registerBtn = new JButton("Staff Registration");
         registerBtn.addActionListener(this);
@@ -40,6 +43,7 @@ public class MgrMenu extends JFrame implements ActionListener{
         add(bookingBtn);
         add(registerBtn);
         add(registeredUser);
+        add(viewAppointment);
         add(logoutBtn);
         add(editProfile);
         
@@ -73,6 +77,9 @@ public class MgrMenu extends JFrame implements ActionListener{
         } else if(ae.getSource() == editProfile){
             Profile profilePage = new Profile();
             profilePage.setVisible(true);
+        } else if(ae.getSource() == viewAppointment){
+            ViewAppointment va = new ViewAppointment();
+            va.setVisible(true);
         }
     }
     

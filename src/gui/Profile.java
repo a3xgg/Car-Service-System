@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import oodj.Oodj;
 import interfaces.*;
 
-public class Profile extends Register implements ActionListener, UserAccountVerification{
+public class Profile extends Register implements ActionListener, UserAccountVerification, ManageUser{
     
     private JButton saveChanges, discardChanges;
     private JLabel username,password,name,ic,email,phone,address,department,retypepwLbl;
@@ -98,13 +98,32 @@ public class Profile extends Register implements ActionListener, UserAccountVeri
     @Override
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource() == saveChanges){
-            editProfile();
+            editUser();
         } else if(ae.getSource() == discardChanges){
             this.setVisible(false);
         }
     } 
     
-    public void editProfile(){
+    @Override
+    public boolean verifyPassword(String password, String retypepw){
+        if(!(password.equals(retypepw))){
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+     public boolean checkDuplicateUsername(String username){
+        for(int i = 0; i < Oodj.staff.size(); i++){
+            if(username.equals(Oodj.staff.get(i).getUsername())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void editUser() {
         boolean flag = false;
         uname = usernameTf.getText();
         if(!(usernameTf.getText().equals(Oodj.loginAccount.getUsername()))){
@@ -141,22 +160,10 @@ public class Profile extends Register implements ActionListener, UserAccountVeri
             this.setVisible(false);
         }
     }
-    
+
     @Override
-    public boolean verifyPassword(String password, String retypepw){
-        if(!(password.equals(retypepw))){
-            return true;
-        }
-        return false;
-    }
-    
+    public void deleteUser() {}
+
     @Override
-     public boolean checkDuplicateUsername(String username){
-        for(int i = 0; i < Oodj.staff.size(); i++){
-            if(username.equals(Oodj.staff.get(i).getUsername())){
-                return true;
-            }
-        }
-        return false;
-    }
+    public void searchUser() {}
 }

@@ -73,9 +73,9 @@ public class TechMenu extends JFrame implements ActionListener{
                     }
                 }
                 if(found){
-//                    if(validateIfCompleted(Oodj.aptPayment)){
-//                        JOptionPane.showMessageDialog(this, "Sorry that appointment is completed.");
-//                    }else {
+                    if(validateIfCompleted(Oodj.aptPayment)){
+                        JOptionPane.showMessageDialog(this, "Sorry that appointment is completed.");
+                    }else {
                         String charge = JOptionPane.showInputDialog(this, "Enter Charges");
                         int charges = Integer.parseInt(charge);
                         Oodj.paymentGUI.setRemainder(charges);
@@ -83,7 +83,7 @@ public class TechMenu extends JFrame implements ActionListener{
                         Oodj.aptPayment.setCharge(charges);
                         this.setVisible(false);
                         Oodj.paymentGUI.setVisible(true);
-//                    }
+                    }
                 } else{
                    JOptionPane.showMessageDialog(this, "Wrong AppointmentID!");
                 }
