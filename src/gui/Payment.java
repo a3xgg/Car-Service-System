@@ -61,7 +61,7 @@ public class Payment extends JFrame implements ActionListener, Generator{
         if(remainder > 0){
             JOptionPane.showMessageDialog(this, "You paid RM" + remainder + " less.");
             label.setText(Oodj.aptPayment.getCustomer().getName() + ", your charge is RM" + remainder);
-        } else{
+        }else{
             FeedbackForm ff = new FeedbackForm();
             JOptionPane.showMessageDialog(this, "Thank you for the payment, for any extra change please refer to our technician");
             JOptionPane.showMessageDialog(this, "Extra change RM" + remainder*-1);
@@ -157,12 +157,9 @@ public class Payment extends JFrame implements ActionListener, Generator{
             msg.setFrom(new InternetAddress(fromEmail));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(mailTo));
             msg.setSubject("Here is your E-Receipt");
-
             Multipart emailContent = new MimeMultipart();
-            
             MimeBodyPart textBodyPart = new MimeBodyPart();
             textBodyPart.setText("Dear "  + Oodj.aptPayment.getCustomer().getName() + ",\nThank you for choosing APU automotive service.\nHere is your receipt of payment.");
-            
             MimeBodyPart pdfFile = new MimeBodyPart();
             MimeBodyPart pdfFile2 = new MimeBodyPart();
             pdfFile.attachFile("C:\\Users\\ander\\Documents\\GitHub\\OODJ\\receipt.pdf");
@@ -171,9 +168,7 @@ public class Payment extends JFrame implements ActionListener, Generator{
             emailContent.addBodyPart(pdfFile);
             emailContent.addBodyPart(pdfFile2);
             msg.setContent(emailContent);
-//            
             System.out.println("Message Sent");
-
             Transport.send(msg);
         } catch(MessagingException e){}catch(IOException e){}
     }

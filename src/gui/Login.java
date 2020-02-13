@@ -20,9 +20,9 @@ public class Login extends JFrame implements ActionListener{
     private final JPasswordField password;
     private final JLabel usrlbl, passlbl, message;
     public JLabel loggedInUser;
-
+    private CustomerMenu cm;
     public Login(){
-
+        cm = new CustomerMenu();
         setSize(266,170);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(100,200);
@@ -179,6 +179,10 @@ public class Login extends JFrame implements ActionListener{
             Oodj.techMenuGUI.setVisible(true);
         }
     }
+
+    public void accessRights(String name){
+        cm.getText().setText("Welcome: " + name);
+    }
     
     public void customerLogin(String uname, String pw){
         boolean flag = false;
@@ -191,10 +195,11 @@ public class Login extends JFrame implements ActionListener{
         }
         if(flag){
             if(pw.equals(Oodj.custLogin.getIcNumber())){
-                CustomerMenu cm = new CustomerMenu();
+                
                 username.setText(null);
                 password.setText(null);
                 this.setVisible(false);
+                accessRights(Oodj.custLogin.getName());
                 cm.setVisible(true);
             } else{
                 JOptionPane.showMessageDialog(this, "Incorrect Password");

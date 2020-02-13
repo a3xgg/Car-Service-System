@@ -1,5 +1,5 @@
 package user;
-public class Person {
+public abstract class Person {
     private String username, password, name, icNumber, email, phoneNumber, mailingAddress;
     //Constructor reference for subclasses
     public Person(String username, String password,String name, String icNumber, String email, String phoneNumber, String mailingAddress){

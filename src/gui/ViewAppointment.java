@@ -43,7 +43,7 @@ public class ViewAppointment extends JFrame implements ActionListener{
                 appointmentTable = new JTable(staffModel);
                 setAllData(Oodj.appointmentDetails);
             }
-        } catch(Exception e){
+        } catch(RuntimeException e){
             appointmentTable = new JTable(custModel);
             setCustData(Oodj.appointmentDetails);
         }

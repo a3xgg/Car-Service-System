@@ -3,22 +3,15 @@ package gui;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
 import oodj.Oodj;
-import static oodj.Oodj.customer;
-import user.Appointment;
-import user.Customer;
 
 public class CustomerMenu extends JFrame implements ActionListener{
     
-    private JButton logout, viewAppointment;
+    private final JButton logout, viewAppointment;
+    public final JLabel text;
 
     public CustomerMenu(){
         setSize(200,200);
@@ -27,11 +20,14 @@ public class CustomerMenu extends JFrame implements ActionListener{
         viewAppointment = new JButton("View Appointments");
         viewAppointment.addActionListener(this);
         
+        text = new JLabel("Welcome: User");
+        
         logout = new JButton("Logout");
         logout.addActionListener(this);
         
         add(viewAppointment);
         add(logout);
+        add(text);
         setLayout(new FlowLayout());
     }
     
@@ -44,5 +40,9 @@ public class CustomerMenu extends JFrame implements ActionListener{
             ViewAppointment va = new ViewAppointment();
             va.setVisible(true);
         }
+    }
+
+    public JLabel getText() {
+        return text;
     }
 }
