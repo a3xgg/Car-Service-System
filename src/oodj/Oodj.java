@@ -45,7 +45,6 @@ public class Oodj {
         paymentGUI = new Payment();
 
         //takes all values from the text file and stores it in the array list
-        
         readCustomer();
         readStaff();
         readAppointment();

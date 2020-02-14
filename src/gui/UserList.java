@@ -20,7 +20,7 @@ public class UserList extends JFrame implements ActionListener, ManageUser {
         {"Staff ID","Name","IC","E-mail","Phone Number","Address","Department"},
         {"Cust ID","Name","IC","E-mail","Phone Number","Address"}};
     
-    private String name, ic, email, phone, address, department;
+    private String name, ic, email, phone, address, department, icNumber;
     private int custID,staffID;
     
     private JTable staffTable, customerTable;
@@ -49,17 +49,17 @@ public class UserList extends JFrame implements ActionListener, ManageUser {
         staffScrollable.setBounds(20, 50, 500, 500);
         
         customerLbl = new JLabel("Customer");
-        customerLbl.setBounds(700, 10, 100, 25);
+        customerLbl.setBounds(1000, 10, 100, 25);
         customerTable = new JTable(customerModel);
         
         edit = new JButton("Edit");
-        edit.setBounds(800, 10, 100, 25);
+        edit.setBounds(500, 10, 100, 25);
         edit.addActionListener(this);
         delete = new JButton("Delete");
         delete.addActionListener(this);
-        delete.setBounds(920, 10, 100, 25);
+        delete.setBounds(620, 10, 100, 25);
         search = new JButton("Search");
-        search.setBounds(1050, 10, 140, 25);
+        search.setBounds(750, 10, 140, 25);
         search.addActionListener(this);
         
         customerScrollable = new JScrollPane(customerTable);
@@ -97,7 +97,12 @@ public class UserList extends JFrame implements ActionListener, ManageUser {
                 System.out.println("Operation Cancelled");
             }
         } else if(ae.getSource() == search){
-            
+            try{
+                icNumber = JOptionPane.showInputDialog(this,"Enter IC number to find");
+                searchUser();
+            } catch (RuntimeException e){
+                System.out.println("Operation Cancelled");
+            }
         }
     }
     
@@ -196,5 +201,40 @@ public class UserList extends JFrame implements ActionListener, ManageUser {
 
     @Override
     public void searchUser() {
+        boolean found = false;
+        Staff s = null;
+        Customer c = null;
+        for(int i = 0; i < Oodj.staff.size(); i++){
+            if(icNumber.equals(Oodj.staff.get(i).getIcNumber())){
+                s = Oodj.staff.get(i);
+                found = true;
+                break;
+            }
+        }
+        if(found){
+            try{
+                JOptionPane.showMessageDialog(this, "Name: " + s.getName() + "\n" + "Email: " + s.getEmail() + "\n"
+                                                + "IC number: " + s.getIcNumber() + "\n" + "Deparment: " + s.getDepartment() + "\n"
+                                                + "Phone: " + s.getPhoneNumber() + "\n" + "Address: " + s.getMailingAddress());
+            } catch (NullPointerException e){}
+            
+        } else{
+           for(int i = 0; i < Oodj.customer.size(); i++){
+                if(icNumber.equals(Oodj.customer.get(i).getIcNumber())){
+                    c = Oodj.customer.get(i);
+                    found = true;
+                    break;
+                }
+            } 
+           if(found){
+               try{
+                   JOptionPane.showMessageDialog(this, "Name: " + c.getName() + "\n" + "Email: " + c.getEmail() + "\n"
+                                                + "IC number: " + c.getIcNumber() + "\n" + "Phone: " + c.getPhoneNumber() 
+                                                + "\n" + "Address: " + c.getMailingAddress());
+               } catch(NullPointerException e){}
+           } else{
+               JOptionPane.showMessageDialog(this,"No User Found");
+           }
+        }
     }
 }
