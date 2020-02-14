@@ -29,7 +29,7 @@ public class UserList extends JFrame implements ActionListener, ManageUser {
     private final DefaultTableModel staffModel = new DefaultTableModel(columnHeader[0],0);
     private final DefaultTableModel customerModel = new DefaultTableModel(columnHeader[1],0);
     
-    private JButton editCustomer, deleteCustomer, searchCustomer,editStaff, deleteStaff, searchStaff;
+    private JButton edit, delete, search;
     
     private JScrollPane staffScrollable, customerScrollable;
     private int x;
@@ -45,16 +45,6 @@ public class UserList extends JFrame implements ActionListener, ManageUser {
         staffLbl.setBounds(10, 10, 100, 25);
         staffTable = new JTable(staffModel);
         
-        editStaff = new JButton("Edit Staff");
-        editStaff.setBounds(50, 10, 100, 25);
-        editStaff.addActionListener(this);
-        deleteStaff = new JButton("Delete Staff");
-        deleteStaff.addActionListener(this);
-        deleteStaff.setBounds(160, 10, 100, 25);
-        searchStaff = new JButton("Search Staff");
-        searchStaff.setBounds(280, 10, 120, 25);
-        searchStaff.addActionListener(this);
-        
         staffScrollable = new JScrollPane(staffTable);
         staffScrollable.setBounds(20, 50, 500, 500);
         
@@ -62,37 +52,36 @@ public class UserList extends JFrame implements ActionListener, ManageUser {
         customerLbl.setBounds(700, 10, 100, 25);
         customerTable = new JTable(customerModel);
         
-        editCustomer = new JButton("Edit Customer");
-        editCustomer.setBounds(800, 10, 100, 25);
-        editCustomer.addActionListener(this);
-        deleteCustomer = new JButton("Delete Customer");
-        deleteCustomer.addActionListener(this);
-        deleteCustomer.setBounds(920, 10, 100, 25);
-        searchCustomer = new JButton("Search Customer");
-        searchCustomer.setBounds(1050, 10, 140, 25);
-        searchCustomer.addActionListener(this);
+        edit = new JButton("Edit");
+        edit.setBounds(800, 10, 100, 25);
+        edit.addActionListener(this);
+        delete = new JButton("Delete");
+        delete.addActionListener(this);
+        delete.setBounds(920, 10, 100, 25);
+        search = new JButton("Search");
+        search.setBounds(1050, 10, 140, 25);
+        search.addActionListener(this);
         
         customerScrollable = new JScrollPane(customerTable);
         customerScrollable.setBounds(710, 50, 500, 500);
         
+        add(edit);
+        add(delete);
+        add(search);
+        
         add(staffLbl);
-        add(editStaff);
-        add(deleteStaff);
-        add(searchStaff);
         add(staffScrollable);
         
         add(customerLbl);
         add(customerScrollable);
-        add(editCustomer);
-        add(deleteCustomer);
-        add(searchCustomer);
+        
         
         setLayout(null);
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if(ae.getSource() == deleteStaff || ae.getSource() == deleteCustomer){
+        if(ae.getSource() == delete){
             try{
                 x = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter ID to delete"));
                 deleteUser();
@@ -100,9 +89,14 @@ public class UserList extends JFrame implements ActionListener, ManageUser {
                 System.out.println("Operation Cancelled");
             }
             
-        } else if(ae.getSource() == editStaff || ae.getSource() == editCustomer){
-            
-        } else if(ae.getSource() == searchStaff || ae.getSource() == searchCustomer){
+        } else if(ae.getSource() == edit){
+            try{
+                x = Integer.parseInt(JOptionPane.showInputDialog(this,"Enter ID to edit"));
+                editUser();
+            } catch (RuntimeException e){
+                System.out.println("Operation Cancelled");
+            }
+        } else if(ae.getSource() == search){
             
         }
     }
@@ -136,7 +130,33 @@ public class UserList extends JFrame implements ActionListener, ManageUser {
 
     @Override
     public void editUser() {
-        
+        boolean flag = false;
+        for(int i = 0; i < Oodj.staff.size(); i++){
+            if(x == Oodj.staff.get(i).getStaffID()){
+                flag = true;
+                Oodj.toEditStaff = Oodj.staff.get(i);
+                break;
+            }
+        }
+        if(flag == true){
+            EditProfile ep = new EditProfile();
+            ep.setVisible(true);
+            //show edit gui
+        } else{
+            for(int i = 0; i < Oodj.customer.size(); i++){
+                if(x == Oodj.customer.get(i).getCustID()){
+                    flag = true;
+                    Oodj.toEditCustomer = Oodj.customer.get(i);
+                    break;
+                }
+            }
+            if(flag == true){
+                EditCustomer ec = new EditCustomer();
+                ec.setVisible(true);
+            } else{
+                JOptionPane.showMessageDialog(this, "No user found");
+            }
+        }
     }
 
     @Override

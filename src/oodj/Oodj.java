@@ -27,6 +27,8 @@ public class Oodj {
     public static ArrayList<Appointment> appointmentDetails;
 
     public static Staff loginAccount;
+    public static Staff toEditStaff;
+    public static Customer toEditCustomer;
     public static Customer custLogin;
     public static Appointment aptPayment;
     
