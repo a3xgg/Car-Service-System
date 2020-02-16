@@ -86,6 +86,7 @@ public class AppointmentBooking extends JFrame implements ActionListener{
         dateSettings.setFormatForDatesCommonEra("yyyy-MM-dd");
         dateSettings.setFormatForDatesBeforeCommonEra("uuuu-MM-dd");
         datePicker = new DatePicker(dateSettings);
+        datePicker.setDateToToday();
         datePicker.addDateChangeListener(e ->{
             availableTechnicians();
             try{
